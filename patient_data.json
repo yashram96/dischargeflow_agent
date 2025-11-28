@@ -1,0 +1,122 @@
+[
+    {
+        "Patient Information": {
+            "First Name": "Kim",
+            "Last Name": "Devid",
+            "Age": "35",
+            "Gender": "Male",
+            "Patient ID": "P00231",
+            "Address": "142 Circle St, San Franscisco, TX 51341",
+            "Phone": "(555) 875-3487",
+            "Emergency Contact": "(555) 875-3488",
+            "Allergies": "Liver complaint",
+            "Current Diagnosis": "Liver Cancer",
+            "Existing Conditions": "Excess Panting, Type 2 Diabetes"
+        },
+        "Lab Tests & Results": {
+            "Complete Blood Count": {
+                "Ordered": "27/01/2024",
+                "Status": "Completed",
+                "Results": "Normal range - WBC: 9.5, RBC: 2.8 Platelets: 960"
+            },
+            "Chest X-Ray": {
+                "Ordered": "27/01/2024",
+                "Status": "Pending"
+            }
+        },
+        "Medications": {
+            "Active Medications": [
+                {
+                    "Name": "Dolo-Crosine",
+                    "Dosage": "654mg",
+                    "Frequency": "2 times daily",
+                    "Status": "Active",
+                    "Instructions": "Sqeeze the tablet in water and have it",
+                    "Prescribed by": "Dr. Satya Devid",
+                    "Prescribed Date": "Jan 29, 2024",
+                    "Refill History": 4
+                },
+                {
+                    "Name": "Jondise",
+                    "Dosage": "18mg",
+                    "Frequency": "Trise daily",
+                    "Status": "Active",
+                    "Instructions": "Keep food in control , take more protein",
+                    "Prescribed by": "Dr. Leak Raja",
+                    "Prescribed Date": "Dec 31, 2023",
+                    "Refill History": 5
+                }
+            ]
+        },
+        "Insurance Details": {
+            "Provider Information": {
+                "Provider": "Red INsurance",
+                "Policy Name": "Ultra Premium Health Plan",
+                "Policy Number": "BCBS-20278-1234345756",
+                "Policy Type": "Family",
+                "Contact": "10012002",
+                "Policy Period": "01/01/2020 - 31/12/2031"
+            },
+            "Coverage Details": {
+                "Coverage Type": "Cashless",
+                "Coverage Percentage": "90%",
+                "Coverage Limit": "₹900,000",
+                "Deductible": "₹10,000",
+                "Co-pay": "₹80",
+                "Pre-authorization": "Required"
+            },
+            "Notes & Audit Trail": {
+                "Note": "Policy verified and active. Pre-authorization approved for current admission.",
+                "Author": "Insurance Desk",
+                "Date": "15/01/2024, 09:00:00"
+            }
+        },
+        "Doctors Notes": [
+            {
+                "Author": "Dr. Prabhas",
+                "Date": "15/01/2024, 10:00:00",
+                "Note": "Patient came to hospital with severe pain in stomach , It symptoms to mild heart attack."
+            }
+        ],
+        "Billing": {
+            "Total Cost": "₹400000.00",
+            "Paid": "₹150000.00",
+            "Insurance Covered": "₹0.00",
+            "Patient Balance": "₹350000.00",
+            "Items": [
+                {
+                    "Description": "Consultation Fee",
+                    "Date": "15/01/2024",
+                    "Cost": "₹150.00",
+                    "Status": "Paid",
+                    "Insurance": "₹0.00",
+                    "Patient Owes": "₹150.00"
+                },
+                {
+                    "Description": "Dialysis",
+                    "Date": "15/01/2024",
+                    "Cost": "₹75000.00",
+                    "Status": "Pending",
+                    "Insurance": "₹0.00",
+                    "Patient Owes": "₹75.00"
+                },
+                {
+                    "Description": "Chest X-Ray",
+                    "Date": "15/01/2024",
+                    "Cost": "₹20000.00",
+                    "Status": "Pending",
+                    "Insurance": "₹0.00",
+                    "Patient Owes": "₹200.00"
+                }
+            ]
+        },
+        "Patient Timeline": [
+            {
+                "Description": "Ordered full body checkup including Liver",
+                "Type": "lab",
+                "Date": "15/01/2024, 09:30:00",
+                "Author": "Dr. Prabhas (Doctor)"
+            }
+        ]
+    }
+]

@@ -1,0 +1,413 @@
+{
+  "patient_id": "P00231",
+  "insurance_output": {
+    "agent": "Insurance",
+    "noc": true,
+    "confidence": 0.7,
+    "issues": [],
+    "meta": {
+      "checked_fields": [
+        "policy_number",
+        "coverage_limits",
+        "pre_authorization"
+      ],
+      "time_ms": 11705.716,
+      "raw_response": {
+        "fallback": true
+      }
+    }
+  },
+  "pharmacy_output": {
+    "agent": "Pharmacy",
+    "noc": false,
+    "confidence": 0.75,
+    "issues": [
+      {
+        "code": "PHARM_ORDER_PENDING",
+        "title": "Pending Medication Order",
+        "severity": "high",
+        "message": "Medication 'Jondise' order is pending dispense",
+        "suggested_action": "Dispense medication before discharge",
+        "evidence": [
+          "data/pharmacy_inventory.json#active_orders[RX-002]"
+        ],
+        "data": {
+          "order_id": "RX-002",
+          "medication": "Jondise"
+        }
+      },
+      {
+        "code": "PHARM_PAYMENT_PENDING",
+        "title": "Discharge Medication Payment Required",
+        "severity": "medium",
+        "message": "Patient needs to pay ₹4450.0 for discharge medications",
+        "suggested_action": "Collect ₹4450.0 from patient/family before discharge",
+        "evidence": [
+          "data/pharmacy_inventory.json#total_discharge_medication_cost"
+        ],
+        "data": {
+          "amount": 4450.0
+        }
+      }
+    ],
+    "meta": {
+      "checked_fields": [
+        "medications",
+        "allergies",
+        "active_orders",
+        "drug_interactions"
+      ],
+      "time_ms": 2528.07,
+      "raw_response": {
+        "fallback": true
+      }
+    }
+  },
+  "ambulance_output": {
+    "agent": "Ambulance",
+    "noc": true,
+    "confidence": 0.7,
+    "issues": [
+      {
+        "code": "TRANSPORT_REQUIRED",
+        "title": "Ambulance Transport Recommended",
+        "severity": "medium",
+        "message": "Patient with liver cancer should have ambulance transport arranged",
+        "suggested_action": "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)",
+        "evidence": [
+          "data/transport_providers.json#providers"
+        ],
+        "data": {
+          "provider": "MedTransport Services",
+          "vehicle": "Wheelchair",
+          "eta": 20,
+          "cost": 1200
+        }
+      }
+    ],
+    "meta": {
+      "checked_fields": [
+        "mobility",
+        "discharge_disposition",
+        "transport_providers"
+      ],
+      "time_ms": 389.518,
+      "raw_response": {
+        "transport_required": true,
+        "fallback": true
+      }
+    }
+  },
+  "bed_output": {
+    "agent": "Bed Management",
+    "noc": false,
+    "confidence": 0.75,
+    "issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "high",
+        "message": "Invoice status: pending",
+        "suggested_action": "Generate final invoice via Billing UI before discharge",
+        "evidence": [
+          "data/billing_snapshot.json#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "status": "pending"
+        }
+      },
+      {
+        "code": "BED_DEPOSIT_SHORTFALL",
+        "title": "Payment Required Before Discharge",
+        "severity": "high",
+        "message": "Patient needs to pay ₹27500.0 before discharge",
+        "suggested_action": "Collect ₹27500.0 from patient/family",
+        "evidence": [
+          "data/billing_snapshot.json#payments.required_before_discharge"
+        ],
+        "data": {
+          "amount": 27500.0
+        }
+      }
+    ],
+    "meta": {
+      "checked_fields": [
+        "billing_status",
+        "deposit_paid",
+        "housekeeping_schedule"
+      ],
+      "time_ms": 345.97299999999996,
+      "raw_response": {
+        "fallback": true
+      }
+    }
+  },
+  "lab_output": {
+    "agent": "Lab",
+    "noc": false,
+    "confidence": 0.8,
+    "issues": [
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        }
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        }
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        }
+      },
+      {
+        "code": "LAB_PENDING",
+        "title": "Pending Test: Chest X-Ray",
+        "severity": "high",
+        "message": "Test 'Chest X-Ray' is still pending",
+        "suggested_action": "Wait for test completion or expedite processing",
+        "evidence": [
+          "data/lab_results.json#results[LAB-002]"
+        ],
+        "data": {
+          "test_id": "LAB-002"
+        }
+      }
+    ],
+    "meta": {
+      "checked_fields": [
+        "lab_tests",
+        "test_results",
+        "critical_values"
+      ],
+      "time_ms": 488.876,
+      "raw_response": {
+        "fallback": true
+      }
+    }
+  },
+  "all_agents_complete": true,
+  "aggregated_issues": [
+    {
+      "code": "PHARM_ORDER_PENDING",
+      "title": "Pending Medication Order",
+      "severity": "high",
+      "message": "Medication 'Jondise' order is pending dispense",
+      "suggested_action": "Dispense medication before discharge",
+      "evidence": [
+        "data/pharmacy_inventory.json#active_orders[RX-002]"
+      ],
+      "data": {
+        "order_id": "RX-002",
+        "medication": "Jondise"
+      },
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "PHARM_PAYMENT_PENDING",
+      "title": "Discharge Medication Payment Required",
+      "severity": "medium",
+      "message": "Patient needs to pay ₹4450.0 for discharge medications",
+      "suggested_action": "Collect ₹4450.0 from patient/family before discharge",
+      "evidence": [
+        "data/pharmacy_inventory.json#total_discharge_medication_cost"
+      ],
+      "data": {
+        "amount": 4450.0
+      },
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "TRANSPORT_REQUIRED",
+      "title": "Ambulance Transport Recommended",
+      "severity": "medium",
+      "message": "Patient with liver cancer should have ambulance transport arranged",
+      "suggested_action": "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)",
+      "evidence": [
+        "data/transport_providers.json#providers"
+      ],
+      "data": {
+        "provider": "MedTransport Services",
+        "vehicle": "Wheelchair",
+        "eta": 20,
+        "cost": 1200
+      },
+      "agent": "Ambulance"
+    },
+    {
+      "code": "BED_INVOICE_PENDING",
+      "title": "Final Invoice Not Generated",
+      "severity": "high",
+      "message": "Invoice status: pending",
+      "suggested_action": "Generate final invoice via Billing UI before discharge",
+      "evidence": [
+        "data/billing_snapshot.json#invoice_status.invoice_generated"
+      ],
+      "data": {
+        "status": "pending"
+      },
+      "agent": "Bed Management"
+    },
+    {
+      "code": "BED_DEPOSIT_SHORTFALL",
+      "title": "Payment Required Before Discharge",
+      "severity": "high",
+      "message": "Patient needs to pay ₹27500.0 before discharge",
+      "suggested_action": "Collect ₹27500.0 from patient/family",
+      "evidence": [
+        "data/billing_snapshot.json#payments.required_before_discharge"
+      ],
+      "data": {
+        "amount": 27500.0
+      },
+      "agent": "Bed Management"
+    },
+    {
+      "code": "LAB_CRITICAL_VALUE",
+      "title": "Critical Value: RBC",
+      "severity": "critical",
+      "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+      "suggested_action": "Consult physician before discharge - critical lab value requires review",
+      "evidence": [
+        "data/lab_results.json#results[LAB-001].components"
+      ],
+      "data": {
+        "test": "Complete Blood Count",
+        "component": "RBC",
+        "value": 2.8,
+        "threshold": 3.0
+      },
+      "agent": "Lab"
+    },
+    {
+      "code": "LAB_CRITICAL_VALUE",
+      "title": "Critical Value: Platelets",
+      "severity": "critical",
+      "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+      "suggested_action": "Consult physician before discharge - critical lab value requires review",
+      "evidence": [
+        "data/lab_results.json#results[LAB-001].components"
+      ],
+      "data": {
+        "test": "Complete Blood Count",
+        "component": "Platelets",
+        "value": 960,
+        "threshold": 450
+      },
+      "agent": "Lab"
+    },
+    {
+      "code": "LAB_CRITICAL_VALUE",
+      "title": "Critical Value: Hemoglobin",
+      "severity": "critical",
+      "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+      "suggested_action": "Consult physician before discharge - critical lab value requires review",
+      "evidence": [
+        "data/lab_results.json#results[LAB-001].components"
+      ],
+      "data": {
+        "test": "Complete Blood Count",
+        "component": "Hemoglobin",
+        "value": 8.2,
+        "threshold": 10.0
+      },
+      "agent": "Lab"
+    },
+    {
+      "code": "LAB_PENDING",
+      "title": "Pending Test: Chest X-Ray",
+      "severity": "high",
+      "message": "Test 'Chest X-Ray' is still pending",
+      "suggested_action": "Wait for test completion or expedite processing",
+      "evidence": [
+        "data/lab_results.json#results[LAB-002]"
+      ],
+      "data": {
+        "test_id": "LAB-002"
+      },
+      "agent": "Lab"
+    }
+  ],
+  "final_decision": "HOLD",
+  "approved": false,
+  "approved_by": [
+    "Insurance",
+    "Ambulance"
+  ],
+  "blocked_by": [
+    "Pharmacy",
+    "Bed Management",
+    "Lab"
+  ],
+  "discharge_summary": {
+    "plain_text": "Discharge is on hold due to pending issues: Pharmacy: Pending Medication Order, Pharmacy: Discharge Medication Payment Required, Ambulance: Ambulance Transport Recommended. Please contact hospital staff for details.",
+    "for_medical_record": "Discharge HOLD. Critical/high severity issues identified: Pharmacy: Pending Medication Order, Pharmacy: Discharge Medication Payment Required, Ambulance: Ambulance Transport Recommended. Resolution required before discharge."
+  },
+  "suggested_auto_resolutions": [
+    {
+      "action": "Collect ₹4450.0 from patient/family before discharge",
+      "details": {
+        "agent": "Pharmacy",
+        "code": "PHARM_PAYMENT_PENDING",
+        "severity": "medium",
+        "data": {
+          "amount": 4450.0
+        }
+      }
+    },
+    {
+      "action": "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)",
+      "details": {
+        "agent": "Ambulance",
+        "code": "TRANSPORT_REQUIRED",
+        "severity": "medium",
+        "data": {
+          "provider": "MedTransport Services",
+          "vehicle": "Wheelchair",
+          "eta": 20,
+          "cost": 1200
+        }
+      }
+    }
+  ],
+  "timestamp": "2025-11-29T04:45:57.703616",
+  "files_written": [
+    "output\\discharge_state_P00231.json",
+    "output\\discharge_audit_log_P00231.json"
+  ]
+}

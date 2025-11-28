@@ -1,0 +1,54 @@
+{
+    "interactions": [
+        {
+            "drug1": "Acetaminophen Extended",
+            "drug2": "Warfarin",
+            "severity": "moderate",
+            "description": "May increase anticoagulant effect",
+            "recommendation": "Monitor INR closely"
+        },
+        {
+            "drug1": "Insulin Glargine",
+            "drug2": "Beta Blockers",
+            "severity": "moderate",
+            "description": "May mask hypoglycemia symptoms",
+            "recommendation": "Monitor blood glucose frequently"
+        },
+        {
+            "drug1": "Ursodeoxycholic Acid",
+            "drug2": "Aluminum Antacids",
+            "severity": "moderate",
+            "description": "May reduce absorption",
+            "recommendation": "Separate administration by 2 hours"
+        },
+        {
+            "drug1": "Acetaminophen Extended",
+            "drug2": "Alcohol",
+            "severity": "high",
+            "description": "Increased risk of hepatotoxicity",
+            "recommendation": "Avoid alcohol consumption"
+        }
+    ],
+    "allergy_contraindications": [
+        {
+            "allergy": "Liver complaint",
+            "contraindicated_drugs": [
+                "Acetaminophen",
+                "Methotrexate",
+                "Isoniazid"
+            ],
+            "severity": "high",
+            "recommendation": "Use alternative analgesics; monitor liver function"
+        },
+        {
+            "allergy": "Sulfa allergy",
+            "contraindicated_drugs": [
+                "Sulfonylureas",
+                "Furosemide",
+                "Celecoxib"
+            ],
+            "severity": "critical",
+            "recommendation": "Absolute contraindication"
+        }
+    ]
+}

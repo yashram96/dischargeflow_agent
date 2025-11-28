@@ -1,0 +1,34 @@
+{
+    "bed_id": "ICU-204",
+    "current_occupant": "P00231",
+    "expected_discharge_time": "2024-01-29T12:00:00",
+    "cleaning_schedule": [
+        {
+            "scheduled_time": "2024-01-29T14:00:00",
+            "type": "terminal_cleaning",
+            "estimated_duration_minutes": 90,
+            "assigned_staff": "Housekeeping Team A",
+            "status": "scheduled",
+            "priority": "high"
+        },
+        {
+            "scheduled_time": "2024-01-29T16:00:00",
+            "type": "inspection",
+            "estimated_duration_minutes": 15,
+            "assigned_staff": "Infection Control Nurse",
+            "status": "scheduled",
+            "priority": "medium"
+        }
+    ],
+    "next_admission_scheduled": {
+        "patient_id": "P00245",
+        "scheduled_admission_time": "2024-01-29T17:00:00",
+        "bed_required_ready_by": "2024-01-29T16:30:00"
+    },
+    "bed_turnover_window": {
+        "discharge_to_ready": "4 hours",
+        "acceptable_delay": "30 minutes",
+        "critical_threshold": "2024-01-29T16:30:00"
+    },
+    "housekeeping_notes": "ICU bed requires deep cleaning and UV sterilization. Mattress inspection required."
+}

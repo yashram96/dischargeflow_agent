@@ -1,0 +1,75 @@
+{
+    "patient_id": "P00231",
+    "policy_number": "BCBS-20278-1234345756",
+    "insurer": "Red Insurance",
+    "policy_details": {
+        "policy_name": "Ultra Premium Health Plan",
+        "policy_type": "Family",
+        "policy_holder": "Kim Devid",
+        "policy_start_date": "2020-01-01",
+        "policy_end_date": "2031-12-31",
+        "policy_status": "active",
+        "last_verified": "2024-01-15T09:00:00"
+    },
+    "coverage_limits": {
+        "annual_limit": 900000.00,
+        "used_this_year": 125000.00,
+        "remaining_limit": 775000.00,
+        "lifetime_limit": 5000000.00,
+        "lifetime_used": 450000.00
+    },
+    "pre_authorization_records": [
+        {
+            "preauth_id": "PA-2024-00231",
+            "admission_id": "ADM-00231-2024",
+            "requested_date": "2024-01-14T16:00:00",
+            "approved_date": "2024-01-15T09:00:00",
+            "status": "approved",
+            "approved_amount": 300000.00,
+            "procedures": [
+                {
+                    "code": "ICD-10: C22.0",
+                    "description": "Liver Cancer Treatment",
+                    "approved": true
+                },
+                {
+                    "code": "CPT: 90935",
+                    "description": "Hemodialysis",
+                    "approved": true,
+                    "sessions_approved": 10,
+                    "sessions_used": 8
+                }
+            ],
+            "conditions": [
+                "Treatment must be completed within 30 days",
+                "Follow-up required within 7 days post-discharge"
+            ],
+            "expiry_date": "2024-02-14T23:59:59"
+        }
+    ],
+    "claims_history": [
+        {
+            "claim_id": "CLM-2024-00231-001",
+            "claim_date": "2024-01-20T10:00:00",
+            "claim_amount": 150000.00,
+            "status": "processing",
+            "expected_settlement_date": "2024-02-05T00:00:00"
+        }
+    ],
+    "co_pay_details": {
+        "per_admission_copay": 80.00,
+        "copay_paid": true,
+        "copay_receipt": "RCPT-00231-COPAY"
+    },
+    "exclusions_applicable": [],
+    "special_conditions": [
+        "Pre-existing condition: Type 2 Diabetes - covered after 2 year waiting period (satisfied)",
+        "Cancer treatment: Covered up to policy limit"
+    ],
+    "insurer_contact": {
+        "phone": "10012002",
+        "email": "claims@redinsurance.com",
+        "tpa": "MediAssist TPA",
+        "tpa_phone": "+91-8800112233"
+    }
+}

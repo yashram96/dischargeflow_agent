@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2025-11-29T04:45:57.702225",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)"
+    ]
+  }
+]

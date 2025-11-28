@@ -1,0 +1,86 @@
+{
+    "providers": [
+        {
+            "provider_id": "AMB-001",
+            "name": "City Emergency Ambulance",
+            "phone": "+91-9876543210",
+            "vehicle_types": [
+                "BLS",
+                "ALS",
+                "ICU"
+            ],
+            "current_availability": {
+                "BLS": {
+                    "available": true,
+                    "eta_minutes": 45,
+                    "cost": 2500
+                },
+                "ALS": {
+                    "available": true,
+                    "eta_minutes": 60,
+                    "cost": 4500
+                },
+                "ICU": {
+                    "available": false,
+                    "eta_minutes": null,
+                    "cost": 8500
+                }
+            }
+        },
+        {
+            "provider_id": "AMB-002",
+            "name": "MedTransport Services",
+            "phone": "+91-9876543211",
+            "vehicle_types": [
+                "BLS",
+                "Wheelchair"
+            ],
+            "current_availability": {
+                "BLS": {
+                    "available": true,
+                    "eta_minutes": 30,
+                    "cost": 2000
+                },
+                "Wheelchair": {
+                    "available": true,
+                    "eta_minutes": 20,
+                    "cost": 1200
+                }
+            }
+        },
+        {
+            "provider_id": "AMB-003",
+            "name": "LifeLine Ambulance",
+            "phone": "+91-9876543212",
+            "vehicle_types": [
+                "ALS",
+                "ICU",
+                "Neonatal"
+            ],
+            "current_availability": {
+                "ALS": {
+                    "available": false,
+                    "eta_minutes": null,
+                    "cost": 5000
+                },
+                "ICU": {
+                    "available": true,
+                    "eta_minutes": 90,
+                    "cost": 9000
+                },
+                "Neonatal": {
+                    "available": true,
+                    "eta_minutes": 120,
+                    "cost": 12000
+                }
+            }
+        }
+    ],
+    "transport_requirements": {
+        "mobility_immobile": "ALS or ICU",
+        "oxygen_required": "ALS or ICU",
+        "discharge_to_facility": "BLS minimum",
+        "discharge_to_home_mobile": "optional",
+        "discharge_to_home_assisted": "BLS or Wheelchair"
+    }
+}
