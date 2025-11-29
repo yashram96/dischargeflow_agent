@@ -3,14 +3,14 @@
   "patient_id": "P00231",
   "alerts": [
     {
-      "alert_id": "ALERT-P00231-LAB-011",
+      "alert_id": "ALERT-P00231-LAB-009",
       "patient_id": "P00231",
       "department": "Lab Portal",
       "priority": "high",
       "issue_code": "LAB_PENDING",
-      "issue_title": "Required Chest X-Ray Pending",
-      "message": "The required 'Chest X-Ray' test has a 'pending' status and has not been completed. Discharge cannot proceed until this test is completed and reviewed.",
-      "suggested_action": "Schedule and complete the Chest X-Ray immediately. Re-verify status upon completion.",
+      "issue_title": "Required test pending",
+      "message": "The 'Chest X-Ray' test is required for discharge but its status is 'pending'.",
+      "suggested_action": "Ensure the Chest X-Ray is completed and reviewed before discharge.",
       "evidence": [
         "LAB RESULTS DATABASE#LAB-002"
       ],
@@ -18,18 +18,18 @@
         "test_name": "Chest X-Ray",
         "status": "pending"
       },
-      "escalated_at": "2025-11-29T08:14:49.096354",
+      "escalated_at": "2025-11-29T08:29:05.132284",
       "status": "pending"
     },
     {
-      "alert_id": "ALERT-P00231-LAB-012",
+      "alert_id": "ALERT-P00231-LAB-010",
       "patient_id": "P00231",
       "department": "Lab Portal",
       "priority": "urgent",
       "issue_code": "LAB_CRITICAL_VALUE",
-      "issue_title": "Critical RBC Count",
-      "message": "Patient's Red Blood Cell (RBC) count is critically low at 2.8 10^6/uL (reference range: 4.5-5.9 10^6/uL), which is below the critical threshold of 3.0 10^6/uL. This requires immediate medical attention.",
-      "suggested_action": "Consult with physician immediately regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
+      "issue_title": "Critical lab value detected",
+      "message": "Complete Blood Count (CBC) shows a critical RBC value of 2.8 10^6/uL. Reference range: 4.5-5.9 10^6/uL. Critical threshold: 3.0 10^6/uL.",
+      "suggested_action": "Review the critical RBC value with the medical team and determine appropriate intervention or further investigation.",
       "evidence": [
         "LAB RESULTS DATABASE#LAB-001#RBC"
       ],
@@ -42,18 +42,18 @@
         "flag": "critical",
         "critical_threshold": 3.0
       },
-      "escalated_at": "2025-11-29T08:14:49.096354",
+      "escalated_at": "2025-11-29T08:29:05.132284",
       "status": "pending"
     },
     {
-      "alert_id": "ALERT-P00231-LAB-013",
+      "alert_id": "ALERT-P00231-LAB-011",
       "patient_id": "P00231",
       "department": "Lab Portal",
       "priority": "urgent",
       "issue_code": "LAB_CRITICAL_VALUE",
-      "issue_title": "Critical Platelet Count",
-      "message": "Patient's Platelet count is critically high at 960 10^3/uL (reference range: 150-400 10^3/uL), which is above the critical threshold of 450 10^3/uL. This requires immediate medical attention.",
-      "suggested_action": "Consult with physician immediately regarding the critically high Platelet count. Further investigation or intervention may be required before discharge.",
+      "issue_title": "Critical lab value detected",
+      "message": "Complete Blood Count (CBC) shows a critical Platelets value of 960 10^3/uL. Reference range: 150-400 10^3/uL. Critical threshold: 450 10^3/uL.",
+      "suggested_action": "Review the critical Platelets value with the medical team and determine appropriate intervention or further investigation.",
       "evidence": [
         "LAB RESULTS DATABASE#LAB-001#Platelets"
       ],
@@ -66,18 +66,18 @@
         "flag": "critical",
         "critical_threshold": 450
       },
-      "escalated_at": "2025-11-29T08:14:49.096354",
+      "escalated_at": "2025-11-29T08:29:05.132284",
       "status": "pending"
     },
     {
-      "alert_id": "ALERT-P00231-LAB-014",
+      "alert_id": "ALERT-P00231-LAB-012",
       "patient_id": "P00231",
       "department": "Lab Portal",
       "priority": "urgent",
       "issue_code": "LAB_CRITICAL_VALUE",
-      "issue_title": "Critical Hemoglobin Level",
-      "message": "Patient's Hemoglobin level is critically low at 8.2 g/dL (reference range: 13.5-17.5 g/dL), which is below the critical threshold of 10.0 g/dL. This requires immediate medical attention.",
-      "suggested_action": "Consult with physician immediately regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
+      "issue_title": "Critical lab value detected",
+      "message": "Complete Blood Count (CBC) shows a critical Hemoglobin value of 8.2 g/dL. Reference range: 13.5-17.5 g/dL. Critical threshold: 10.0 g/dL.",
+      "suggested_action": "Review the critical Hemoglobin value with the medical team and determine appropriate intervention or further investigation.",
       "evidence": [
         "LAB RESULTS DATABASE#LAB-001#Hemoglobin"
       ],
@@ -90,11 +90,11 @@
         "flag": "critical",
         "critical_threshold": 10.0
       },
-      "escalated_at": "2025-11-29T08:14:49.096354",
+      "escalated_at": "2025-11-29T08:29:05.132284",
       "status": "pending"
     }
   ],
   "total_alerts": 4,
   "highest_priority": "urgent",
-  "generated_at": "2025-11-29T08:14:49.100388"
+  "generated_at": "2025-11-29T08:29:05.135281"
 }

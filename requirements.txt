@@ -18,3 +18,7 @@ python-dotenv==1.0.1
 
 # Utilities
 typing-extensions==4.12.2
+
+# API
+fastapi==0.115.6
+uvicorn==0.34.0

@@ -5,7 +5,7 @@
       "priority": "urgent",
       "title": "Insurance Coverage Discrepancy",
       "message": "Please contact the insurance desk regarding: Insurance Coverage Discrepancy",
-      "action_required": "Immediately contact Red Insurance to investigate why the approved pre-authorization amount has not been applied to the bill. Clarify the reason for ₹0.00 coverage and the patient's balance. Verify if any deductibles, co-pays, non-covered services, or processing errors account for this discrepancy. Patient discharge cannot proceed from an insurance perspective until this is resolved.",
+      "action_required": "Investigate the discrepancy between the approved pre-authorization and the actual insurance payout. Verify if all billed procedures align with the pre-authorization, check for any unstated deductibles, co-pays, or non-covered services, and clarify the calculation of the patient's final balance.",
       "department": "Insurance Desk"
     },
     {
@@ -16,62 +16,62 @@
       "department": "Pharmacy Portal"
     },
     {
-      "priority": "high",
-      "title": "New Medication Order Not Dispensed",
-      "message": "Your medication new medication order not dispensed requires action.",
-      "action_required": "Place an urgent pharmacy order for Insulin Glargine and ensure it is dispensed prior to discharge.",
+      "priority": "urgent",
+      "title": "Discharge Medication Not Found in Pharmacy Orders",
+      "message": "Your medication discharge medication not found in pharmacy orders requires action.",
+      "action_required": "Verify Insulin Glargine prescription has been sent to pharmacy and track its order status immediately.",
       "department": "Pharmacy Portal"
     },
     {
       "priority": "high",
-      "title": "Potential Allergy Conflict: Acetaminophen and Liver Complaint",
-      "message": "Your medication potential allergy conflict: acetaminophen and liver complaint requires action.",
-      "action_required": "Consult with the prescribing physician to review Dolo-Crosine (Acetaminophen) for a patient with a liver complaint. Consider an alternative pain relief medication or a lower, carefully monitored dose with liver function tests.",
+      "title": "Potential Medication-Allergy Conflict",
+      "message": "Your medication potential medication-allergy conflict requires action.",
+      "action_required": "Review Dolo-Crosine prescription with prescribing physician considering the 'Liver complaint' allergy. Consider alternative analgesics or dose adjustment with liver function monitoring.",
       "department": "Pharmacy Portal"
     },
     {
       "priority": "urgent",
       "title": "Final Invoice Not Generated",
-      "message": "There is a billing matter that needs your attention: The final invoice for patient P00231 (Account ID: ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized invoice.",
-      "action_required": "Generate the final invoice to complete the billing process and enable patient discharge.",
+      "message": "There is a billing matter that needs your attention: The final invoice for patient P00231 (ACC-00231-2024) has not been generated. Discharge cannot proceed without a finalized invoice.",
+      "action_required": "Generate the final invoice and ensure all charges are accurately reflected.",
       "department": "Billing Portal"
     },
     {
       "priority": "high",
       "title": "Pending Billing Adjustments",
-      "message": "There is a billing matter that needs your attention: There are pending billing adjustments that need to be finalized. This includes an insurance pre-authorization pending approval and a dialysis procedure billing that is not yet finalized. These items may impact the final invoice.",
-      "action_required": "Expedite the approval process for the insurance pre-authorization and finalize all outstanding procedure billings to ensure an accurate and complete final invoice.",
+      "message": "There is a billing matter that needs your attention: There are pending adjustments that need to be resolved before the final invoice can be accurately generated. This includes an insurance pre-authorization and a dialysis procedure billing.",
+      "action_required": "Expedite the resolution of all pending adjustments, especially the insurance pre-authorization and the dialysis procedure billing, to finalize the patient's account.",
       "department": "Billing Portal"
     },
     {
       "priority": "high",
-      "title": "Required Chest X-Ray Pending",
-      "message": "Your required chest x-ray pending needs attention. Please contact the lab.",
-      "action_required": "Schedule and complete the Chest X-Ray immediately. Re-verify status upon completion.",
+      "title": "Required test pending",
+      "message": "Your required test pending needs attention. Please contact the lab.",
+      "action_required": "Ensure the Chest X-Ray is completed and reviewed before discharge.",
       "department": "Lab Portal"
     },
     {
       "priority": "urgent",
-      "title": "Critical RBC Count",
-      "message": "Your critical rbc count needs attention. Please contact the lab.",
-      "action_required": "Consult with physician immediately regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Review the critical RBC value with the medical team and determine appropriate intervention or further investigation.",
       "department": "Lab Portal"
     },
     {
       "priority": "urgent",
-      "title": "Critical Platelet Count",
-      "message": "Your critical platelet count needs attention. Please contact the lab.",
-      "action_required": "Consult with physician immediately regarding the critically high Platelet count. Further investigation or intervention may be required before discharge.",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Review the critical Platelets value with the medical team and determine appropriate intervention or further investigation.",
       "department": "Lab Portal"
     },
     {
       "priority": "urgent",
-      "title": "Critical Hemoglobin Level",
-      "message": "Your critical hemoglobin level needs attention. Please contact the lab.",
-      "action_required": "Consult with physician immediately regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Review the critical Hemoglobin value with the medical team and determine appropriate intervention or further investigation.",
       "department": "Lab Portal"
     }
   ],
   "total_notifications": 10,
-  "generated_at": "2025-11-29T08:14:49.100388"
+  "generated_at": "2025-11-29T08:29:05.135281"
 }
