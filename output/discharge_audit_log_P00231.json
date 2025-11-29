@@ -1366,5 +1366,244 @@
       "Ensure patient or financial department clears payment for all discharge medications before release.",
       "Proceed with booking an ALS ambulance."
     ]
+  },
+  {
+    "timestamp": "2025-11-29T10:19:24.049201",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 16,
+    "critical_issues": [
+      {
+        "code": "INS_POLICY_STATUS_UNKNOWN",
+        "title": "Policy Status Undetermined",
+        "severity": "critical",
+        "message": "The current status of the patient's insurance policy is unknown, which is a critical barrier to confirming active coverage and eligibility for discharge.",
+        "suggested_action": "Immediately contact Red Insurance to verify the policy's current status (active/inactive/expired).",
+        "evidence": [
+          "Policy Status: unknown"
+        ],
+        "data": {
+          "policy_status": "unknown"
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "INS_PREAUTH_MISSING",
+        "title": "Required Pre-authorization Not Found",
+        "severity": "critical",
+        "message": "Pre-authorization was required for the services, but no record of approval or submission is available.",
+        "suggested_action": "Verify if pre-authorization was obtained and approved. If not, initiate the process or clarify with the insurance provider.",
+        "evidence": [
+          "Pre-authorization Required: Required, Pre-Authorization Records: []"
+        ],
+        "data": {
+          "preauth_required": true,
+          "preauth_records_found": false
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "INS_PARTIAL_COVERAGE",
+        "title": "Zero Insurance Coverage Applied",
+        "severity": "critical",
+        "message": "Despite the annual limit being sufficient, the insurance has covered ₹0.00 of the total bill, resulting in a patient balance of ₹350,000.00. This indicates a significant issue with coverage application.",
+        "suggested_action": "Investigate the reason for zero coverage. This could be linked to the unknown policy status, missing pre-authorization, deductibles, or non-covered services. Communicate the financial responsibility clearly to the patient.",
+        "evidence": [
+          "Amount Covered by Insurance: ₹0.00, Patient's Balance: ₹350,000.00"
+        ],
+        "data": {
+          "amount_covered_by_insurance": 0,
+          "patient_balance": 350000,
+          "total_bill": 400000
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
+        "suggested_action": "Generate the final invoice for patient P00231.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "patient_id": "P00231",
+          "account_id": "ACC-00231-2024"
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical RBC value of 2.8 10^6/uL (reference range: 4.5-5.9, critical threshold: 3.0).",
+        "suggested_action": "Review RBC results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#RBC"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical",
+          "critical_threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical Platelets value of 960 10^3/uL (reference range: 150-400, critical threshold: 450).",
+        "suggested_action": "Review Platelets results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#Platelets"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical",
+          "critical_threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical Hemoglobin value of 8.2 g/dL (reference range: 13.5-17.5, critical threshold: 10.0).",
+        "suggested_action": "Review Hemoglobin results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#Hemoglobin"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical",
+          "critical_threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Ensure payment for Dolo-Crosine is cleared before discharge.",
+      "Ensure payment for Jondise is cleared before discharge.",
+      "Verify and clear payment for Insulin Glargine before discharge.",
+      "Proceed with booking ALS ambulance from City Emergency Ambulance (AMB-001).",
+      "Review and finalize all pending billing adjustments, especially the insurance pre-authorization (₹247,500.00) and dialysis procedure billing (₹75,000.00)."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T10:20:58.617775",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 12,
+    "critical_issues": [
+      {
+        "code": "INS_COVERAGE_DISCREPANCY",
+        "title": "Insurance Coverage and Patient Balance Discrepancy",
+        "severity": "critical",
+        "message": "Despite an approved pre-authorization for ₹500,000, the insurance has reportedly covered ₹0.00 of the ₹400,000 hospital bill. However, the patient's balance is stated as ₹350,000, which is ₹50,000 less than the total bill if insurance covered nothing. This indicates a significant discrepancy in financial reporting or unstated adjustments/patient responsibility, preventing a clear financial discharge.",
+        "suggested_action": "Urgently investigate the financial details. Clarify why the approved pre-authorization amount has not been applied to the bill. Determine the source of the ₹50,000 reduction from the total bill to the patient's balance. Verify all deductibles, co-pays, and the current claim processing status with Red Insurance.",
+        "evidence": [
+          "Pre-authorization approved for ₹500,000, Total Hospital Bill ₹400,000, Amount Covered by Insurance ₹0.00, Patient's Balance ₹350,000."
+        ],
+        "data": {
+          "total_bill": 400000.0,
+          "preauth_approved_amount": 500000.0,
+          "insurance_covered_amount_reported": 0.0,
+          "patient_balance_reported": 350000.0,
+          "unaccounted_difference": 50000.0
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "PHARM_ORDER_PENDING",
+        "title": "New Discharge Medication Not Ordered/Dispensed",
+        "severity": "critical",
+        "message": "The new discharge medication 'Insulin Glargine' is listed in discharge prescriptions but has no corresponding entry in the pharmacy order status, indicating it has not been ordered or dispensed.",
+        "suggested_action": "Verify if Insulin Glargine was ordered. If not, place an urgent order and ensure dispensing before discharge. Confirm dosage and frequency with the prescribing physician.",
+        "evidence": [],
+        "data": {},
+        "agent": "Pharmacy"
+      },
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. A final invoice is a critical prerequisite for patient discharge.",
+        "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are finalized and accurately reflected before proceeding with discharge.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "patient_id": "P00231",
+          "account_id": "ACC-00231-2024",
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical value for RBC in Complete Blood Count",
+        "severity": "critical",
+        "message": "The 'RBC' component of the 'Complete Blood Count' test has a critical value of 2.8 10^6/uL. Reference range: 4.5-5.9.",
+        "suggested_action": "Review critical lab results with a physician immediately and determine appropriate medical intervention or re-testing.",
+        "evidence": [],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical value for Platelets in Complete Blood Count",
+        "severity": "critical",
+        "message": "The 'Platelets' component of the 'Complete Blood Count' test has a critical value of 960 10^3/uL. Reference range: 150-400.",
+        "suggested_action": "Review critical lab results with a physician immediately and determine appropriate medical intervention or re-testing.",
+        "evidence": [],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical value for Hemoglobin in Complete Blood Count",
+        "severity": "critical",
+        "message": "The 'Hemoglobin' component of the 'Complete Blood Count' test has a critical value of 8.2 g/dL. Reference range: 13.5-17.5.",
+        "suggested_action": "Review critical lab results with a physician immediately and determine appropriate medical intervention or re-testing.",
+        "evidence": [],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5"
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Proceed with booking ALS ambulance transport with City Emergency Ambulance (AMB-001).",
+      "Expedite the approval of insurance pre-authorization and finalize all pending procedure billings before discharge to ensure the final bill is accurate and complete."
+    ]
   }
 ]

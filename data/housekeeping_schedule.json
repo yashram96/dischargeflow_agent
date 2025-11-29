@@ -1,34 +1,60 @@
-{
-    "bed_id": "ICU-204",
-    "current_occupant": "P00231",
-    "expected_discharge_time": "2024-01-29T12:00:00",
-    "cleaning_schedule": [
-        {
-            "scheduled_time": "2024-01-29T14:00:00",
-            "type": "terminal_cleaning",
-            "estimated_duration_minutes": 90,
-            "assigned_staff": "Housekeeping Team A",
-            "status": "scheduled",
-            "priority": "high"
+[
+    {
+        "patient_id": "P00231",
+        "bed_id": "ICU-204",
+        "current_occupant": "P00231",
+        "expected_discharge_time": "2024-01-29T12:00:00",
+        "cleaning_schedule": [
+            {
+                "scheduled_time": "2024-01-29T14:00:00",
+                "type": "terminal_cleaning",
+                "estimated_duration_minutes": 90,
+                "assigned_staff": "Housekeeping Team A",
+                "status": "scheduled",
+                "priority": "high"
+            },
+            {
+                "scheduled_time": "2024-01-29T16:00:00",
+                "type": "inspection",
+                "estimated_duration_minutes": 15,
+                "assigned_staff": "Infection Control Nurse",
+                "status": "scheduled",
+                "priority": "medium"
+            }
+        ],
+        "next_admission_scheduled": {
+            "patient_id": "P00245",
+            "scheduled_admission_time": "2024-01-29T17:00:00",
+            "bed_required_ready_by": "2024-01-29T16:30:00"
         },
-        {
-            "scheduled_time": "2024-01-29T16:00:00",
-            "type": "inspection",
-            "estimated_duration_minutes": 15,
-            "assigned_staff": "Infection Control Nurse",
-            "status": "scheduled",
-            "priority": "medium"
-        }
-    ],
-    "next_admission_scheduled": {
-        "patient_id": "P00245",
-        "scheduled_admission_time": "2024-01-29T17:00:00",
-        "bed_required_ready_by": "2024-01-29T16:30:00"
+        "bed_turnover_window": {
+            "discharge_to_ready": "4 hours",
+            "acceptable_delay": "30 minutes",
+            "critical_threshold": "2024-01-29T16:30:00"
+        },
+        "housekeeping_notes": "ICU bed requires deep cleaning and UV sterilization. Mattress inspection required."
     },
-    "bed_turnover_window": {
-        "discharge_to_ready": "4 hours",
-        "acceptable_delay": "30 minutes",
-        "critical_threshold": "2024-01-29T16:30:00"
-    },
-    "housekeeping_notes": "ICU bed requires deep cleaning and UV sterilization. Mattress inspection required."
-}
+    {
+        "patient_id": "P00232",
+        "bed_id": "GEN-101",
+        "current_occupant": "P00232",
+        "expected_discharge_time": "2024-01-29T10:00:00",
+        "cleaning_schedule": [
+            {
+                "scheduled_time": "2024-01-29T10:30:00",
+                "type": "standard_cleaning",
+                "estimated_duration_minutes": 30,
+                "assigned_staff": "Housekeeping Team B",
+                "status": "scheduled",
+                "priority": "medium"
+            }
+        ],
+        "next_admission_scheduled": null,
+        "bed_turnover_window": {
+            "discharge_to_ready": "1 hour",
+            "acceptable_delay": "15 minutes",
+            "critical_threshold": "2024-01-29T12:00:00"
+        },
+        "housekeeping_notes": "Standard cleaning required."
+    }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-11-29T10:23:34.314646",
+    "patient_id": "P00232",
+    "final_decision": "HOLD",
+    "issues_count": 1,
+    "critical_issues": [],
+    "recommended_next_steps": []
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "patient_id": "P00232",
+  "final_decision": "HOLD",
+  "total_alerts": 1,
+  "alerts_by_priority": {
+    "urgent": 0,
+    "high": 1,
+    "normal": 0,
+    "low": 0
+  },
+  "departments_involved": [
+    "Pharmacy Portal"
+  ],
+  "department_summary": {
+    "Pharmacy Portal": 1
+  },
+  "generated_at": "2025-11-29T10:23:34.318073"
+}

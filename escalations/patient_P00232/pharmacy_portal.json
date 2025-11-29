@@ -1,0 +1,23 @@
+{
+  "department": "Pharmacy Portal",
+  "patient_id": "P00232",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00232-PHA-001",
+      "patient_id": "P00232",
+      "department": "Pharmacy Portal",
+      "priority": "high",
+      "issue_code": "PHARM_ORDER_PENDING",
+      "issue_title": "Discharge Medication Not Dispensed",
+      "message": "The discharge prescription for Paracetamol has not been confirmed as filled and dispensed by the pharmacy. The 'Pharmacy Order Status' is empty, indicating no active orders are being tracked or that the discharge prescription's status is not updated.",
+      "suggested_action": "Verify with the pharmacy that the discharge medication (Paracetamol) has been filled and is ready for patient pick-up or delivery before discharge.",
+      "evidence": [],
+      "data": {},
+      "escalated_at": "2025-11-29T10:23:34.315859",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 1,
+  "highest_priority": "high",
+  "generated_at": "2025-11-29T10:23:34.315859"
+}

@@ -5,8 +5,8 @@
   "alerts_by_priority": {
     "urgent": 6,
     "high": 4,
-    "normal": 2,
-    "low": 0
+    "normal": 1,
+    "low": 1
   },
   "departments_involved": [
     "Insurance Desk",
@@ -22,5 +22,5 @@
     "Billing Portal": 2,
     "Lab Portal": 4
   },
-  "generated_at": "2025-11-29T08:29:05.136330"
+  "generated_at": "2025-11-29T10:20:58.629707"
 }

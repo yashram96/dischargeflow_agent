@@ -118,5 +118,95 @@
                 "Author": "Dr. Prabhas (Doctor)"
             }
         ]
+    },
+    {
+        "Patient Information": {
+            "First Name": "John",
+            "Last Name": "Doe",
+            "Age": "45",
+            "Gender": "Male",
+            "Patient ID": "P00232",
+            "Address": "789 Pine St, Austin, TX 78701",
+            "Phone": "(555) 123-4567",
+            "Emergency Contact": "(555) 123-4568",
+            "Allergies": "None",
+            "Current Diagnosis": "Viral Fever",
+            "Existing Conditions": "None"
+        },
+        "Lab Tests & Results": {
+            "Complete Blood Count": {
+                "Ordered": "28/01/2024",
+                "Status": "Completed",
+                "Results": "Normal range - WBC: 6.5, RBC: 4.8 Platelets: 250"
+            }
+        },
+        "Medications": {
+            "Active Medications": [
+                {
+                    "Name": "Paracetamol",
+                    "Dosage": "500mg",
+                    "Frequency": "As needed",
+                    "Status": "Completed",
+                    "Instructions": "Take for fever",
+                    "Prescribed by": "Dr. Smith",
+                    "Prescribed Date": "Jan 25, 2024",
+                    "Refill History": 0
+                }
+            ]
+        },
+        "Insurance Details": {
+            "Provider Information": {
+                "Provider": "Green Insurance",
+                "Policy Name": "Standard Health Plan",
+                "Policy Number": "GI-99999-88888",
+                "Policy Type": "Individual",
+                "Contact": "1800-GREEN",
+                "Policy Period": "01/01/2023 - 31/12/2025"
+            },
+            "Coverage Details": {
+                "Coverage Type": "Cashless",
+                "Coverage Percentage": "100%",
+                "Coverage Limit": "₹500,000",
+                "Deductible": "₹0",
+                "Co-pay": "₹0",
+                "Pre-authorization": "Approved"
+            },
+            "Notes & Audit Trail": {
+                "Note": "Policy active. Pre-auth approved.",
+                "Author": "Insurance Desk",
+                "Date": "25/01/2024, 10:00:00"
+            }
+        },
+        "Doctors Notes": [
+            {
+                "Author": "Dr. Smith",
+                "Date": "29/01/2024, 09:00:00",
+                "Note": "Patient fully recovered. Fit for discharge."
+            }
+        ],
+        "Billing": {
+            "Total Cost": "₹25000.00",
+            "Paid": "₹25000.00",
+            "Insurance Covered": "₹25000.00",
+            "Patient Balance": "₹0.00",
+            "Items": [
+                {
+                    "Description": "Hospital Stay",
+                    "Date": "25/01/2024",
+                    "Cost": "₹25000.00",
+                    "Status": "Paid",
+                    "Insurance": "₹25000.00",
+                    "Patient Owes": "₹0.00"
+                }
+            ]
+        },
+        "Patient Timeline": [
+            {
+                "Description": "Admitted for high fever",
+                "Type": "admission",
+                "Date": "25/01/2024, 08:00:00",
+                "Author": "Dr. Smith"
+            }
+        ]
     }
 ]

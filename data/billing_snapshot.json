@@ -1,56 +1,103 @@
-{
-    "patient_id": "P00231",
-    "account_id": "ACC-00231-2024",
-    "admission_date": "2024-01-15T10:00:00",
-    "expected_discharge_date": "2024-01-29T12:00:00",
-    "bed_details": {
-        "bed_id": "ICU-204",
-        "room_type": "ICU",
-        "daily_rate": 8500.00,
-        "total_days": 14,
-        "total_bed_charges": 119000.00
-    },
-    "invoice_status": {
-        "invoice_generated": false,
-        "final_invoice_id": null,
-        "status": "pending",
-        "last_updated": "2024-01-28T18:00:00"
-    },
-    "charges_summary": {
-        "consultation_fees": 150.00,
-        "procedure_charges": 75000.00,
-        "lab_charges": 20000.00,
-        "pharmacy_charges": 45000.00,
-        "bed_charges": 119000.00,
-        "miscellaneous": 15850.00,
-        "total_charges": 275000.00
-    },
-    "payments": {
-        "deposit_paid": 150000.00,
-        "insurance_approved": 0.00,
-        "insurance_pending_approval": 247500.00,
-        "patient_balance": 125000.00,
-        "required_before_discharge": 27500.00
-    },
-    "pending_adjustments": [
-        {
-            "description": "Insurance pre-authorization pending",
-            "amount": 247500.00,
-            "status": "pending_approval"
+[
+    {
+        "patient_id": "P00231",
+        "account_id": "ACC-00231-2024",
+        "admission_date": "2024-01-15T10:00:00",
+        "expected_discharge_date": "2024-01-29T12:00:00",
+        "bed_details": {
+            "bed_id": "ICU-204",
+            "room_type": "ICU",
+            "daily_rate": 8500.00,
+            "total_days": 14,
+            "total_bed_charges": 119000.00
         },
-        {
-            "description": "Dialysis procedure billing",
-            "amount": 75000.00,
-            "status": "not_finalized"
+        "invoice_status": {
+            "invoice_generated": false,
+            "final_invoice_id": null,
+            "status": "pending",
+            "last_updated": "2024-01-28T18:00:00"
+        },
+        "charges_summary": {
+            "consultation_fees": 150.00,
+            "procedure_charges": 75000.00,
+            "lab_charges": 20000.00,
+            "pharmacy_charges": 45000.00,
+            "bed_charges": 119000.00,
+            "miscellaneous": 15850.00,
+            "total_charges": 275000.00
+        },
+        "payments": {
+            "deposit_paid": 150000.00,
+            "insurance_approved": 0.00,
+            "insurance_pending_approval": 247500.00,
+            "patient_balance": 125000.00,
+            "required_before_discharge": 27500.00
+        },
+        "pending_adjustments": [
+            {
+                "description": "Insurance pre-authorization pending",
+                "amount": 247500.00,
+                "status": "pending_approval"
+            },
+            {
+                "description": "Dialysis procedure billing",
+                "amount": 75000.00,
+                "status": "not_finalized"
+            }
+        ],
+        "deposit_analysis": {
+            "total_estimated_charges": 275000.00,
+            "insurance_expected_coverage": 247500.00,
+            "patient_responsibility": 27500.00,
+            "deposit_paid": 150000.00,
+            "deposit_shortfall": 0,
+            "refund_due": 122500.00,
+            "refund_status": "pending_final_invoice"
         }
-    ],
-    "deposit_analysis": {
-        "total_estimated_charges": 275000.00,
-        "insurance_expected_coverage": 247500.00,
-        "patient_responsibility": 27500.00,
-        "deposit_paid": 150000.00,
-        "deposit_shortfall": 0,
-        "refund_due": 122500.00,
-        "refund_status": "pending_final_invoice"
+    },
+    {
+        "patient_id": "P00232",
+        "account_id": "ACC-00232-2024",
+        "admission_date": "2024-01-25T08:00:00",
+        "expected_discharge_date": "2024-01-29T10:00:00",
+        "bed_details": {
+            "bed_id": "GEN-101",
+            "room_type": "General Ward",
+            "daily_rate": 2000.00,
+            "total_days": 4,
+            "total_bed_charges": 8000.00
+        },
+        "invoice_status": {
+            "invoice_generated": true,
+            "final_invoice_id": "INV-2024-00232",
+            "status": "finalized",
+            "last_updated": "2024-01-29T09:00:00"
+        },
+        "charges_summary": {
+            "consultation_fees": 1000.00,
+            "procedure_charges": 0.00,
+            "lab_charges": 500.00,
+            "pharmacy_charges": 500.00,
+            "bed_charges": 8000.00,
+            "miscellaneous": 0.00,
+            "total_charges": 10000.00
+        },
+        "payments": {
+            "deposit_paid": 5000.00,
+            "insurance_approved": 10000.00,
+            "insurance_pending_approval": 0.00,
+            "patient_balance": 0.00,
+            "required_before_discharge": 0.00
+        },
+        "pending_adjustments": [],
+        "deposit_analysis": {
+            "total_estimated_charges": 10000.00,
+            "insurance_expected_coverage": 10000.00,
+            "patient_responsibility": 0.00,
+            "deposit_paid": 5000.00,
+            "deposit_shortfall": 0,
+            "refund_due": 5000.00,
+            "refund_status": "processed"
+        }
     }
-}
+]

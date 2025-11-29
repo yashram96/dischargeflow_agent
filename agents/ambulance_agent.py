@@ -24,7 +24,8 @@ class AmbulanceAgent(BaseAgent):
         self.start_timer()
         
         # Load data files
-        patient_data = self.load_patient_data()
+        patient_data = self.load_patient_data(patient_id)
+        # Transport providers are global resources, not per-patient
         transport_providers = read_json_file("data/transport_providers.json")
         
         self.add_checked_field("mobility")

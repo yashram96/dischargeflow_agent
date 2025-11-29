@@ -1,0 +1,14 @@
+{
+  "patient_id": "P00232",
+  "notifications": [
+    {
+      "priority": "high",
+      "title": "Discharge Medication Not Dispensed",
+      "message": "Your medication discharge medication not dispensed requires action.",
+      "action_required": "Verify with the pharmacy that the discharge medication (Paracetamol) has been filled and is ready for patient pick-up or delivery before discharge.",
+      "department": "Pharmacy Portal"
+    }
+  ],
+  "total_notifications": 1,
+  "generated_at": "2025-11-29T10:23:34.315859"
+}

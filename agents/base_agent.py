@@ -107,12 +107,66 @@ class BaseAgent(ABC):
             meta=meta
         )
     
-    def load_patient_data(self, patient_data_path: str = "patient_data.json") -> Dict[str, Any]:
-        """Load patient data from JSON file"""
-        data = read_json_file(patient_data_path)
-        if data and isinstance(data, list) and len(data) > 0:
-            return data[0]  # Patient data is in an array
-        return data
+    def load_patient_data(self, patient_id: str = None) -> Dict[str, Any]:
+        """
+        Load patient data from JSON file.
+        
+        Args:
+            patient_id: Optional patient ID to filter for. If None, uses self.patient_id.
+            
+        Returns:
+            Dict containing patient data
+        """
+        target_id = patient_id or getattr(self, 'patient_id', None)
+        
+        try:
+            data = read_json_file("patient_data.json")
+            
+            # Handle list of patients
+            if isinstance(data, list):
+                if not target_id:
+                    # If no ID specified and data is list, return first one or raise error
+                    # For safety, let's default to P00231 if we can't find one
+                    return data[0]
+                
+                # Find specific patient
+                for patient in data:
+                    # Check various common locations for ID
+                    pid = (patient.get("Patient Information", {}).get("Patient ID") or 
+                           patient.get("patient_id") or 
+                           patient.get("id"))
+                    
+                    if pid == target_id:
+                        return patient
+                
+                print(f"⚠️  Patient ID {target_id} not found in patient_data.json")
+                return {}
+            
+            return data
+            
+        except Exception as e:
+            print(f"Error loading patient data: {e}")
+            return {}
+
+    def get_patient_record(self, data: List[Dict], patient_id: str, id_field: str = "patient_id") -> Dict[str, Any]:
+        """
+        Helper to find a specific patient's record in a list of records.
+        
+        Args:
+            data: List of dictionaries
+            patient_id: ID to look for
+            id_field: Field name containing the ID (default: "patient_id")
+            
+        Returns:
+            Matching record or empty dict
+        """
+        if not isinstance(data, list):
+            return data if data else {}
+            
+        for record in data:
+            if record.get(id_field) == patient_id:
+                return record
+        return {}
     
     @abstractmethod
     def verify(self, patient_id: str, **kwargs) -> AgentOutputSchema:
@@ -127,7 +181,7 @@ class BaseAgent(ABC):
             AgentOutputSchema with verification results
         """
         pass
-    
+
     def to_json(self, output: AgentOutputSchema) -> str:
         """Convert output to JSON string"""
         return output.model_dump_json(indent=2)

@@ -1,0 +1,145 @@
+{
+  "patient_id": "P00232",
+  "status": "hold",
+  "final_decision": "HOLD",
+  "timestamp": "2025-11-29T10:23:34.312615",
+  "expires_at": null,
+  "approved_by": [
+    "Insurance",
+    "Ambulance",
+    "Bed Management",
+    "Lab"
+  ],
+  "blocked_by": [
+    "Pharmacy"
+  ],
+  "agents": {
+    "Insurance": {
+      "agent": "Insurance",
+      "noc": true,
+      "confidence": 0.95,
+      "issues": [],
+      "meta": {
+        "checked_fields": [
+          "policy_number",
+          "coverage_limits",
+          "pre_authorization"
+        ],
+        "time_ms": 9995.88,
+        "raw_response": {
+          "policy_status": "active",
+          "preauth_status": "approved",
+          "coverage_sufficient": true
+        }
+      }
+    },
+    "Pharmacy": {
+      "agent": "Pharmacy",
+      "noc": false,
+      "confidence": 0.9,
+      "issues": [
+        {
+          "code": "PHARM_ORDER_PENDING",
+          "title": "Discharge Medication Not Dispensed",
+          "severity": "high",
+          "message": "The discharge prescription for Paracetamol has not been confirmed as filled and dispensed by the pharmacy. The 'Pharmacy Order Status' is empty, indicating no active orders are being tracked or that the discharge prescription's status is not updated.",
+          "suggested_action": "Verify with the pharmacy that the discharge medication (Paracetamol) has been filled and is ready for patient pick-up or delivery before discharge.",
+          "evidence": [],
+          "data": {}
+        }
+      ],
+      "meta": {
+        "checked_fields": [
+          "medications",
+          "allergies",
+          "active_orders",
+          "drug_interactions"
+        ],
+        "time_ms": 7653.481,
+        "raw_response": {
+          "pending_orders": [
+            "Paracetamol (Discharge Prescription)"
+          ],
+          "allergy_conflicts": [],
+          "interactions_found": []
+        }
+      }
+    },
+    "Ambulance": {
+      "agent": "Ambulance",
+      "noc": true,
+      "confidence": 1.0,
+      "issues": [],
+      "meta": {
+        "checked_fields": [
+          "mobility",
+          "discharge_disposition",
+          "transport_providers"
+        ],
+        "time_ms": 8971.724999999999,
+        "raw_response": {
+          "transport_required": false,
+          "recommended_vehicle_type": null,
+          "provider_available": false,
+          "estimated_eta": 0
+        }
+      }
+    },
+    "Bed Management": {
+      "agent": "Bed Management",
+      "noc": true,
+      "confidence": 1.0,
+      "issues": [],
+      "meta": {
+        "checked_fields": [
+          "billing_status",
+          "deposit_paid",
+          "housekeeping_schedule"
+        ],
+        "time_ms": 7959.876,
+        "raw_response": {
+          "invoice_generated": true,
+          "deposit_sufficient": true,
+          "housekeeping_scheduled": true,
+          "shortfall_amount": 0
+        }
+      }
+    },
+    "Lab": {
+      "agent": "Lab",
+      "noc": true,
+      "confidence": 1.0,
+      "issues": [],
+      "meta": {
+        "checked_fields": [
+          "lab_tests",
+          "test_results",
+          "critical_values"
+        ],
+        "time_ms": 10473.23,
+        "raw_response": {
+          "pending_tests": [],
+          "critical_values": [],
+          "all_tests_complete": true
+        }
+      }
+    }
+  },
+  "issues": [
+    {
+      "code": "PHARM_ORDER_PENDING",
+      "title": "Discharge Medication Not Dispensed",
+      "severity": "high",
+      "message": "The discharge prescription for Paracetamol has not been confirmed as filled and dispensed by the pharmacy. The 'Pharmacy Order Status' is empty, indicating no active orders are being tracked or that the discharge prescription's status is not updated.",
+      "suggested_action": "Verify with the pharmacy that the discharge medication (Paracetamol) has been filled and is ready for patient pick-up or delivery before discharge.",
+      "evidence": [],
+      "data": {},
+      "agent": "Pharmacy"
+    }
+  ],
+  "metadata": {
+    "created_at": "2025-11-29T10:23:34.312615",
+    "last_updated": "2025-11-29T10:23:34.312615",
+    "version": "1.0"
+  }
+}

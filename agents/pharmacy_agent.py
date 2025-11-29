@@ -24,8 +24,10 @@ class PharmacyAgent(BaseAgent):
         self.start_timer()
         
         # Load data files
-        patient_data = self.load_patient_data()
-        pharmacy_inventory = read_json_file("data/pharmacy_inventory.json")
+        patient_data = self.load_patient_data(patient_id)
+        all_pharmacy_inventory = read_json_file("data/pharmacy_inventory.json")
+        pharmacy_inventory = self.get_patient_record(all_pharmacy_inventory, patient_id)
+        
         drug_interactions = read_json_file("data/drug_interaction_rules.json")
         
         self.add_checked_field("medications")

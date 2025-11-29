@@ -24,9 +24,13 @@ class BedManagementAgent(BaseAgent):
         self.start_timer()
         
         # Load data files
-        patient_data = self.load_patient_data()
-        billing_snapshot = read_json_file("data/billing_snapshot.json")
-        housekeeping_schedule = read_json_file("data/housekeeping_schedule.json")
+        patient_data = self.load_patient_data(patient_id)
+        
+        all_billing = read_json_file("data/billing_snapshot.json")
+        billing_snapshot = self.get_patient_record(all_billing, patient_id)
+        
+        all_housekeeping = read_json_file("data/housekeeping_schedule.json")
+        housekeeping_schedule = self.get_patient_record(all_housekeeping, patient_id)
         
         self.add_checked_field("billing_status")
         self.add_checked_field("deposit_paid")

@@ -9,11 +9,11 @@
       "priority": "high",
       "issue_code": "PHARM_ORDER_PENDING",
       "issue_title": "Medication Order Pending Dispense",
-      "message": "The pharmacy order for 'Jondise' is currently pending and has not been dispensed.",
-      "suggested_action": "Follow up with pharmacy to expedite dispensing of Jondise.",
+      "message": "The medication 'Jondise' has a pending pharmacy order (RX-002) and has not been dispensed. This medication is critical for the patient's ongoing care.",
+      "suggested_action": "Contact pharmacy immediately to expedite dispensing of Jondise (Ursodeoxycholic Acid).",
       "evidence": [],
       "data": {},
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     },
     {
@@ -21,13 +21,13 @@
       "patient_id": "P00231",
       "department": "Pharmacy Portal",
       "priority": "urgent",
-      "issue_code": "PHARM_ORDER_MISSING",
-      "issue_title": "Discharge Medication Not Found in Pharmacy Orders",
-      "message": "The discharge medication 'Insulin Glargine' is prescribed but is not listed in the provided pharmacy order status. It may not have been ordered or tracked.",
-      "suggested_action": "Verify Insulin Glargine prescription has been sent to pharmacy and track its order status immediately.",
+      "issue_code": "PHARM_ORDER_PENDING",
+      "issue_title": "New Discharge Medication Not Ordered/Dispensed",
+      "message": "The new discharge medication 'Insulin Glargine' is listed in discharge prescriptions but has no corresponding entry in the pharmacy order status, indicating it has not been ordered or dispensed.",
+      "suggested_action": "Verify if Insulin Glargine was ordered. If not, place an urgent order and ensure dispensing before discharge. Confirm dosage and frequency with the prescribing physician.",
       "evidence": [],
       "data": {},
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     },
     {
@@ -37,29 +37,29 @@
       "priority": "high",
       "issue_code": "PHARM_ALLERGY_CONFLICT",
       "issue_title": "Potential Medication-Allergy Conflict",
-      "message": "The patient has a 'Liver complaint' allergy. 'Dolo-Crosine' (generic: Acetaminophen Extended) is hepatotoxic and should be used with caution or an alternative considered in patients with liver issues.",
-      "suggested_action": "Review Dolo-Crosine prescription with prescribing physician considering the 'Liver complaint' allergy. Consider alternative analgesics or dose adjustment with liver function monitoring.",
+      "message": "Patient has a 'Liver complaint' allergy. 'Dolo-Crosine' (generic: Acetaminophen Extended) is known to be hepatotoxic and should be used with caution or an alternative considered in patients with pre-existing liver issues. Review appropriateness with prescribing physician.",
+      "suggested_action": "Consult with the prescribing physician to re-evaluate Dolo-Crosine given the patient's liver complaint. Consider alternative analgesics or dose adjustment, or confirm the benefit outweighs the risk.",
       "evidence": [],
       "data": {},
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     },
     {
       "alert_id": "ALERT-P00231-PHA-005",
       "patient_id": "P00231",
       "department": "Pharmacy Portal",
-      "priority": "normal",
+      "priority": "high",
       "issue_code": "PHARM_PAYMENT_PENDING",
-      "issue_title": "Discharge Medication Payment Pending",
-      "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
-      "suggested_action": "Ensure patient or financial department clears payment for all discharge medications before release.",
+      "issue_title": "Discharge Medication Payments Pending",
+      "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending. Medications cannot be released until payment is cleared.",
+      "suggested_action": "Coordinate with patient/billing department to clear payments for all discharge medications prior to release.",
       "evidence": [],
       "data": {},
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     }
   ],
   "total_alerts": 4,
   "highest_priority": "urgent",
-  "generated_at": "2025-11-29T08:29:05.132895"
+  "generated_at": "2025-11-29T10:20:58.626346"
 }

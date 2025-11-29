@@ -9,48 +9,52 @@
       "priority": "urgent",
       "issue_code": "BED_INVOICE_PENDING",
       "issue_title": "Final Invoice Not Generated",
-      "message": "The final invoice for patient P00231 (ACC-00231-2024) has not been generated. Discharge cannot proceed without a finalized invoice.",
-      "suggested_action": "Generate the final invoice and ensure all charges are accurately reflected.",
+      "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. A final invoice is a critical prerequisite for patient discharge.",
+      "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are finalized and accurately reflected before proceeding with discharge.",
       "evidence": [
-        "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        "BILLING_SNAPSHOT#invoice_status.invoice_generated"
       ],
       "data": {
         "patient_id": "P00231",
-        "account_id": "ACC-00231-2024"
+        "account_id": "ACC-00231-2024",
+        "invoice_generated": false
       },
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     },
     {
       "alert_id": "ALERT-P00231-BIL-008",
       "patient_id": "P00231",
       "department": "Billing Portal",
-      "priority": "high",
+      "priority": "normal",
       "issue_code": "BED_BILLING_ADJUSTMENT",
       "issue_title": "Pending Billing Adjustments",
-      "message": "There are pending adjustments that need to be resolved before the final invoice can be accurately generated. This includes an insurance pre-authorization and a dialysis procedure billing.",
-      "suggested_action": "Expedite the resolution of all pending adjustments, especially the insurance pre-authorization and the dialysis procedure billing, to finalize the patient's account.",
+      "message": "There are pending billing adjustments, including insurance pre-authorization and unfinalized procedure billing, which could alter the final patient responsibility or lead to future billing disputes.",
+      "suggested_action": "Expedite the approval of insurance pre-authorization and finalize all pending procedure billings before discharge to ensure the final bill is accurate and complete.",
       "evidence": [
-        "BILLING SNAPSHOT#pending_adjustments"
+        "BILLING_SNAPSHOT#pending_adjustments"
       ],
       "data": {
-        "pending_items_count": 2,
-        "pending_amounts": [
+        "pending_adjustments_count": 2,
+        "total_pending_amount": 322500.0,
+        "adjustments_details": [
           {
             "description": "Insurance pre-authorization pending",
-            "amount": 247500.0
+            "amount": 247500.0,
+            "status": "pending_approval"
           },
           {
             "description": "Dialysis procedure billing",
-            "amount": 75000.0
+            "amount": 75000.0,
+            "status": "not_finalized"
           }
         ]
       },
-      "escalated_at": "2025-11-29T08:29:05.132284",
+      "escalated_at": "2025-11-29T10:20:58.625479",
       "status": "pending"
     }
   ],
   "total_alerts": 2,
   "highest_priority": "urgent",
-  "generated_at": "2025-11-29T08:29:05.133910"
+  "generated_at": "2025-11-29T10:20:58.627363"
 }

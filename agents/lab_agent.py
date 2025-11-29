@@ -24,8 +24,9 @@ class LabAgent(BaseAgent):
         self.start_timer()
         
         # Load data files
-        patient_data = self.load_patient_data()
-        lab_results = read_json_file("data/lab_results.json")
+        patient_data = self.load_patient_data(patient_id)
+        all_lab_results = read_json_file("data/lab_results.json")
+        lab_results = self.get_patient_record(all_lab_results, patient_id)
         
         self.add_checked_field("lab_tests")
         self.add_checked_field("test_results")

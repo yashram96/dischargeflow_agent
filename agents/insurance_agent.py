@@ -37,8 +37,10 @@ class InsuranceAgent(BaseAgent):
         self.start_timer()
         
         # Load data files
-        patient_data = self.load_patient_data()
-        insurer_records = read_json_file("data/insurer_records.json")
+        # Load data files
+        patient_data = self.load_patient_data(patient_id)
+        all_insurer_records = read_json_file("data/insurer_records.json")
+        insurer_records = self.get_patient_record(all_insurer_records, patient_id)
         
         # Read insurance policy text
         try:

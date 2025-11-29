@@ -1,72 +1,91 @@
-{
-    "patient_id": "P00231",
-    "active_orders": [
-        {
-            "order_id": "RX-001",
-            "medication_name": "Dolo-Crosine",
-            "generic_name": "Acetaminophen Extended",
-            "dosage": "654mg",
-            "frequency": "2 times daily",
-            "quantity": 60,
-            "ordered_date": "2024-01-29T08:00:00",
-            "status": "dispensed",
-            "dispense_date": "2024-01-29T09:30:00",
-            "pharmacist": "John Smith",
-            "instructions": "Squeeze the tablet in water and have it"
-        },
-        {
-            "order_id": "RX-002",
-            "medication_name": "Jondise",
-            "generic_name": "Ursodeoxycholic Acid",
-            "dosage": "18mg",
-            "frequency": "Thrice daily",
-            "quantity": 90,
-            "ordered_date": "2023-12-31T10:00:00",
-            "status": "pending",
-            "dispense_date": null,
-            "instructions": "Keep food in control, take more protein"
-        },
-        {
-            "order_id": "RX-003",
-            "medication_name": "Insulin Glargine",
-            "generic_name": "Insulin Glargine",
-            "dosage": "20 units",
-            "frequency": "Once daily at bedtime",
-            "quantity": 1,
-            "ordered_date": "2024-01-28T14:00:00",
-            "status": "dispensed",
-            "dispense_date": "2024-01-28T15:00:00",
-            "pharmacist": "Sarah Johnson",
-            "instructions": "For Type 2 Diabetes management"
-        }
-    ],
-    "discharge_medications": [
-        {
-            "medication_name": "Dolo-Crosine",
-            "dosage": "654mg",
-            "frequency": "2 times daily",
-            "duration": "30 days",
-            "cost": 450.00,
-            "payment_status": "pending"
-        },
-        {
-            "medication_name": "Jondise",
-            "dosage": "18mg",
-            "frequency": "Thrice daily",
-            "duration": "30 days",
-            "cost": 1200.00,
-            "payment_status": "pending"
-        },
-        {
-            "medication_name": "Insulin Glargine",
-            "dosage": "20 units",
-            "frequency": "Once daily",
-            "duration": "30 days",
-            "cost": 2800.00,
-            "payment_status": "pending"
-        }
-    ],
-    "total_discharge_medication_cost": 4450.00,
-    "inventory_status": "available",
-    "notes": "Patient has pending order RX-002 that needs to be dispensed before discharge"
-}
+[
+    {
+        "patient_id": "P00231",
+        "active_orders": [
+            {
+                "order_id": "RX-001",
+                "medication_name": "Dolo-Crosine",
+                "generic_name": "Acetaminophen Extended",
+                "dosage": "654mg",
+                "frequency": "2 times daily",
+                "quantity": 60,
+                "ordered_date": "2024-01-29T08:00:00",
+                "status": "dispensed",
+                "dispense_date": "2024-01-29T09:30:00",
+                "pharmacist": "John Smith",
+                "instructions": "Squeeze the tablet in water and have it"
+            },
+            {
+                "order_id": "RX-002",
+                "medication_name": "Jondise",
+                "generic_name": "Ursodeoxycholic Acid",
+                "dosage": "18mg",
+                "frequency": "Thrice daily",
+                "quantity": 90,
+                "ordered_date": "2023-12-31T10:00:00",
+                "status": "pending",
+                "dispense_date": null,
+                "instructions": "Keep food in control, take more protein"
+            },
+            {
+                "order_id": "RX-003",
+                "medication_name": "Insulin Glargine",
+                "generic_name": "Insulin Glargine",
+                "dosage": "20 units",
+                "frequency": "Once daily at bedtime",
+                "quantity": 1,
+                "ordered_date": "2024-01-28T14:00:00",
+                "status": "dispensed",
+                "dispense_date": "2024-01-28T15:00:00",
+                "pharmacist": "Sarah Johnson",
+                "instructions": "For Type 2 Diabetes management"
+            }
+        ],
+        "discharge_medications": [
+            {
+                "medication_name": "Dolo-Crosine",
+                "dosage": "654mg",
+                "frequency": "2 times daily",
+                "duration": "30 days",
+                "cost": 450.00,
+                "payment_status": "pending"
+            },
+            {
+                "medication_name": "Jondise",
+                "dosage": "18mg",
+                "frequency": "Thrice daily",
+                "duration": "30 days",
+                "cost": 1200.00,
+                "payment_status": "pending"
+            },
+            {
+                "medication_name": "Insulin Glargine",
+                "dosage": "20 units",
+                "frequency": "Once daily",
+                "duration": "30 days",
+                "cost": 2800.00,
+                "payment_status": "pending"
+            }
+        ],
+        "total_discharge_medication_cost": 4450.00,
+        "inventory_status": "available",
+        "notes": "Patient has pending order RX-002 that needs to be dispensed before discharge"
+    },
+    {
+        "patient_id": "P00232",
+        "active_orders": [],
+        "discharge_medications": [
+            {
+                "medication_name": "Paracetamol",
+                "dosage": "500mg",
+                "frequency": "As needed",
+                "duration": "5 days",
+                "cost": 50.00,
+                "payment_status": "paid"
+            }
+        ],
+        "total_discharge_medication_cost": 50.00,
+        "inventory_status": "available",
+        "notes": "No active orders pending."
+    }
+]
