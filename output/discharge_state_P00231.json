@@ -2,7 +2,7 @@
   "patient_id": "P00231",
   "status": "hold",
   "final_decision": "HOLD",
-  "timestamp": "2025-11-29T07:54:34.364181",
+  "timestamp": "2025-11-29T08:14:49.084539",
   "expires_at": null,
   "approved_by": [
     "Ambulance"
@@ -17,39 +17,24 @@
     "Insurance": {
       "agent": "Insurance",
       "noc": false,
-      "confidence": 0.8,
+      "confidence": 0.7,
       "issues": [
         {
-          "code": "DATA_INCONSISTENCY",
-          "title": "Financial Data Contradiction",
-          "severity": "high",
-          "message": "The 'Amount Covered by Insurance' is stated as ₹0.00, while the 'Patient's Balance' is ₹350,000.00 for a total bill of ₹400,000.00. This implies ₹50,000.00 was covered, directly contradicting the stated 'Amount Covered by Insurance'. This inconsistency needs immediate clarification.",
-          "suggested_action": "Reconcile financial records with the insurance provider and the hospital's billing department to clarify the actual covered amount and patient responsibility.",
-          "evidence": [
-            "Amount Covered by Insurance: ₹0.00, Patient's Balance: ₹350000.00, Total Hospital Bill: ₹400000.00"
-          ],
-          "data": {
-            "amount_covered_by_insurance": 0.0,
-            "patient_balance": 350000.0,
-            "total_bill": 400000.0
-          }
-        },
-        {
-          "code": "INS_COVERAGE_NOT_APPLIED",
-          "title": "Approved Pre-authorization Not Reflected in Coverage",
+          "code": "INS_PARTIAL_COVERAGE",
+          "title": "Insurance Coverage Discrepancy",
           "severity": "critical",
-          "message": "Despite an active policy, cashless coverage type, and an approved pre-authorization for ₹500,000.00 (which is greater than the total bill of ₹400,000.00), the 'Amount Covered by Insurance' is reported as ₹0.00. This indicates that the expected insurance coverage has not been applied to the bill, preventing a smooth discharge.",
-          "suggested_action": "Contact Red Insurance immediately to ascertain why the approved pre-authorization has not resulted in coverage for the bill. Verify if all procedures billed align with the pre-authorized services and if any deductibles, co-pays, or non-covered services are impacting the claim.",
+          "message": "Despite an approved pre-authorization for ₹500,000 and sufficient annual limits, the insurance has covered ₹0.00 of the ₹400,000 hospital bill. This contradicts the expected cashless coverage based on the approved pre-authorization, leaving a significant patient balance of ₹350,000.",
+          "suggested_action": "Immediately contact Red Insurance to investigate why the approved pre-authorization amount has not been applied to the bill. Clarify the reason for ₹0.00 coverage and the patient's balance. Verify if any deductibles, co-pays, non-covered services, or processing errors account for this discrepancy. Patient discharge cannot proceed from an insurance perspective until this is resolved.",
           "evidence": [
-            "Policy Status: active, Coverage Type: Cashless, Pre-authorization Status: approved (PA-2024-00231), Approved Amount: 500000.0, Total Hospital Bill: 400000.0, Amount Covered by Insurance: 0.0"
+            "Pre-authorization (PA-2024-00231) approved for ₹500,000. Total Hospital Bill: ₹400,000. Amount Covered by Insurance: ₹0.00. Patient's Balance: ₹350,000. Coverage Type: Cashless."
           ],
           "data": {
-            "policy_status": "active",
-            "coverage_type": "Cashless",
-            "preauth_status": "approved",
+            "preauth_id": "PA-2024-00231",
             "preauth_approved_amount": 500000.0,
             "total_bill": 400000.0,
-            "amount_covered_by_insurance": 0.0
+            "insurance_covered": 0.0,
+            "patient_balance": 350000.0,
+            "remaining_annual_limit": 775000.0
           }
         }
       ],
@@ -59,52 +44,70 @@
           "coverage_limits",
           "pre_authorization"
         ],
-        "time_ms": 17806.668999999998,
+        "time_ms": 13647.981,
         "raw_response": {
           "policy_status": "active",
           "preauth_status": "approved",
-          "coverage_sufficient": true
+          "coverage_sufficient": false
         }
       }
     },
     "Pharmacy": {
       "agent": "Pharmacy",
       "noc": false,
-      "confidence": 1.0,
+      "confidence": 0.9,
       "issues": [
         {
           "code": "PHARM_ORDER_PENDING",
-          "title": "Pharmacy Order Pending",
+          "title": "Medication Order Pending Dispense",
           "severity": "high",
-          "message": "The pharmacy order for Jondise (RX-002) is currently pending and has not been dispensed.",
-          "suggested_action": "Contact pharmacy to expedite dispensing of Jondise.",
+          "message": "Pharmacy order for Jondise (Ursodeoxycholic Acid) is pending and has not been dispensed for discharge.",
+          "suggested_action": "Follow up with pharmacy to expedite dispensing of Jondise.",
           "evidence": [],
           "data": {}
         },
         {
           "code": "PHARM_ORDER_PENDING",
-          "title": "Missing Pharmacy Order",
+          "title": "New Medication Order Not Dispensed",
           "severity": "high",
-          "message": "Insulin Glargine is listed as a discharge medication but no corresponding pharmacy order was found or processed.",
-          "suggested_action": "Create and process a pharmacy order for Insulin Glargine immediately.",
+          "message": "Insulin Glargine is a new discharge medication with no corresponding dispensed pharmacy order. It needs to be ordered and dispensed.",
+          "suggested_action": "Place an urgent pharmacy order for Insulin Glargine and ensure it is dispensed prior to discharge.",
           "evidence": [],
           "data": {}
         },
         {
           "code": "PHARM_ALLERGY_CONFLICT",
-          "title": "Potential Allergy Conflict",
+          "title": "Potential Allergy Conflict: Acetaminophen and Liver Complaint",
           "severity": "high",
-          "message": "Dolo-Crosine (Acetaminophen Extended) is prescribed for a patient with a known 'Liver complaint' allergy. Acetaminophen can be hepatotoxic.",
-          "suggested_action": "Review Dolo-Crosine prescription with prescribing physician. Consider alternative medication or dose adjustment, and ensure liver function monitoring is in place.",
+          "message": "Patient has a 'Liver complaint' allergy. Dolo-Crosine (generic: Acetaminophen Extended) is hepatotoxic and should be used with extreme caution or an alternative considered in patients with liver issues. The prescribed dosage of 654mg twice daily (1308mg/day) warrants careful review.",
+          "suggested_action": "Consult with the prescribing physician to review Dolo-Crosine (Acetaminophen) for a patient with a liver complaint. Consider an alternative pain relief medication or a lower, carefully monitored dose with liver function tests.",
           "evidence": [],
           "data": {}
         },
         {
           "code": "PHARM_PAYMENT_PENDING",
-          "title": "Payment Pending for Discharge Medications",
-          "severity": "high",
-          "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
-          "suggested_action": "Ensure patient or insurance clears payment for all discharge medications before release.",
+          "title": "Discharge Medication Payment Pending",
+          "severity": "medium",
+          "message": "Payment for Dolo-Crosine is pending for discharge.",
+          "suggested_action": "Coordinate with patient/billing department to clear payment for Dolo-Crosine.",
+          "evidence": [],
+          "data": {}
+        },
+        {
+          "code": "PHARM_PAYMENT_PENDING",
+          "title": "Discharge Medication Payment Pending",
+          "severity": "medium",
+          "message": "Payment for Jondise is pending for discharge.",
+          "suggested_action": "Coordinate with patient/billing department to clear payment for Jondise.",
+          "evidence": [],
+          "data": {}
+        },
+        {
+          "code": "PHARM_PAYMENT_PENDING",
+          "title": "Discharge Medication Payment Pending",
+          "severity": "medium",
+          "message": "Payment for Insulin Glargine is pending for discharge.",
+          "suggested_action": "Coordinate with patient/billing department to clear payment for Insulin Glargine.",
           "evidence": [],
           "data": {}
         }
@@ -116,7 +119,7 @@
           "active_orders",
           "drug_interactions"
         ],
-        "time_ms": 13606.638,
+        "time_ms": 12966.873,
         "raw_response": {
           "pending_orders": [
             "Jondise",
@@ -125,7 +128,12 @@
           "allergy_conflicts": [
             "Dolo-Crosine (Acetaminophen Extended)"
           ],
-          "interactions_found": []
+          "interactions_found": [],
+          "pending_payments": [
+            "Dolo-Crosine",
+            "Jondise",
+            "Insulin Glargine"
+          ]
         }
       }
     },
@@ -138,14 +146,12 @@
           "code": "TRANSPORT_REQUIRED",
           "title": "Ambulance Transport Required",
           "severity": "medium",
-          "message": "Patient has a serious condition (Liver Cancer) requiring medical supervision during transport. An ALS ambulance is recommended due to the diagnosis and existing condition of excess panting.",
-          "suggested_action": "Proceed with booking an ALS ambulance with City Emergency Ambulance (AMB-001).",
+          "message": "Patient has Liver Cancer and Excess Panting, indicating a serious condition requiring medical supervision and monitoring during transport. An ALS ambulance is recommended to ensure patient safety and appropriate care.",
+          "suggested_action": "Proceed with booking an ALS ambulance from an available provider.",
           "evidence": [],
           "data": {
-            "patient_diagnosis": "Liver Cancer",
-            "recommended_type": "ALS",
-            "provider_name": "City Emergency Ambulance",
             "provider_id": "AMB-001",
+            "vehicle_type": "ALS",
             "eta_minutes": 60
           }
         }
@@ -156,7 +162,7 @@
           "discharge_disposition",
           "transport_providers"
         ],
-        "time_ms": 6263.2029999999995,
+        "time_ms": 8998.866,
         "raw_response": {
           "transport_required": true,
           "recommended_vehicle_type": "ALS",
@@ -168,34 +174,35 @@
     "Bed Management": {
       "agent": "Bed Management",
       "noc": false,
-      "confidence": 0.8,
+      "confidence": 0.95,
       "issues": [
         {
           "code": "BED_INVOICE_PENDING",
           "title": "Final Invoice Not Generated",
           "severity": "critical",
-          "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
-          "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are captured and approved.",
+          "message": "The final invoice for patient P00231 (Account ID: ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized invoice.",
+          "suggested_action": "Generate the final invoice to complete the billing process and enable patient discharge.",
           "evidence": [
-            "BILLING SNAPSHOT#invoice_status.invoice_generated"
+            "BILLING_SNAPSHOT#invoice_status.invoice_generated"
           ],
           "data": {
             "patient_id": "P00231",
-            "account_id": "ACC-00231-2024"
+            "account_id": "ACC-00231-2024",
+            "invoice_generated": false
           }
         },
         {
           "code": "BED_BILLING_ADJUSTMENT",
           "title": "Pending Billing Adjustments",
           "severity": "high",
-          "message": "There are pending adjustments that need to be finalized before discharge. This includes insurance pre-authorization and dialysis procedure billing, which could impact the final patient responsibility.",
-          "suggested_action": "Expedite approval for insurance pre-authorization and finalize billing for the dialysis procedure. Update the patient's account accordingly.",
+          "message": "There are pending billing adjustments that need to be finalized. This includes an insurance pre-authorization pending approval and a dialysis procedure billing that is not yet finalized. These items may impact the final invoice.",
+          "suggested_action": "Expedite the approval process for the insurance pre-authorization and finalize all outstanding procedure billings to ensure an accurate and complete final invoice.",
           "evidence": [
-            "BILLING SNAPSHOT#pending_adjustments"
+            "BILLING_SNAPSHOT#pending_adjustments"
           ],
           "data": {
-            "pending_adjustments_count": 2,
-            "details": [
+            "pending_items_count": 2,
+            "pending_details": [
               {
                 "description": "Insurance pre-authorization pending",
                 "amount": 247500.0,
@@ -216,7 +223,7 @@
           "deposit_paid",
           "housekeeping_schedule"
         ],
-        "time_ms": 12341.119,
+        "time_ms": 13440.747,
         "raw_response": {
           "invoice_generated": false,
           "deposit_sufficient": true,
@@ -232,10 +239,10 @@
       "issues": [
         {
           "code": "LAB_PENDING",
-          "title": "Required lab test pending",
+          "title": "Required Chest X-Ray Pending",
           "severity": "high",
-          "message": "The 'Chest X-Ray' test is required for discharge but its status is 'pending'. It has not been completed before the discharge clearance time.",
-          "suggested_action": "Ensure Chest X-Ray is completed and results are reviewed by a physician before discharge.",
+          "message": "The required 'Chest X-Ray' test has a 'pending' status and has not been completed. Discharge cannot proceed until this test is completed and reviewed.",
+          "suggested_action": "Schedule and complete the Chest X-Ray immediately. Re-verify status upon completion.",
           "evidence": [
             "LAB RESULTS DATABASE#LAB-002"
           ],
@@ -246,12 +253,12 @@
         },
         {
           "code": "LAB_CRITICAL_VALUE",
-          "title": "Critical lab value detected",
+          "title": "Critical RBC Count",
           "severity": "critical",
-          "message": "RBC value of 2.8 10^6/uL is critically low (reference range: 4.5-5.9, critical threshold: 3.0).",
-          "suggested_action": "Consult with physician for immediate review and intervention regarding critical RBC level.",
+          "message": "Patient's Red Blood Cell (RBC) count is critically low at 2.8 10^6/uL (reference range: 4.5-5.9 10^6/uL), which is below the critical threshold of 3.0 10^6/uL. This requires immediate medical attention.",
+          "suggested_action": "Consult with physician immediately regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
           "evidence": [
-            "LAB RESULTS DATABASE#LAB-001"
+            "LAB RESULTS DATABASE#LAB-001#RBC"
           ],
           "data": {
             "test_name": "Complete Blood Count",
@@ -265,12 +272,12 @@
         },
         {
           "code": "LAB_CRITICAL_VALUE",
-          "title": "Critical lab value detected",
+          "title": "Critical Platelet Count",
           "severity": "critical",
-          "message": "Platelets value of 960 10^3/uL is critically high (reference range: 150-400, critical threshold: 450).",
-          "suggested_action": "Consult with physician for immediate review and intervention regarding critical Platelets level.",
+          "message": "Patient's Platelet count is critically high at 960 10^3/uL (reference range: 150-400 10^3/uL), which is above the critical threshold of 450 10^3/uL. This requires immediate medical attention.",
+          "suggested_action": "Consult with physician immediately regarding the critically high Platelet count. Further investigation or intervention may be required before discharge.",
           "evidence": [
-            "LAB RESULTS DATABASE#LAB-001"
+            "LAB RESULTS DATABASE#LAB-001#Platelets"
           ],
           "data": {
             "test_name": "Complete Blood Count",
@@ -284,12 +291,12 @@
         },
         {
           "code": "LAB_CRITICAL_VALUE",
-          "title": "Critical lab value detected",
+          "title": "Critical Hemoglobin Level",
           "severity": "critical",
-          "message": "Hemoglobin value of 8.2 g/dL is critically low (reference range: 13.5-17.5, critical threshold: 10.0).",
-          "suggested_action": "Consult with physician for immediate review and intervention regarding critical Hemoglobin level.",
+          "message": "Patient's Hemoglobin level is critically low at 8.2 g/dL (reference range: 13.5-17.5 g/dL), which is below the critical threshold of 10.0 g/dL. This requires immediate medical attention.",
+          "suggested_action": "Consult with physician immediately regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
           "evidence": [
-            "LAB RESULTS DATABASE#LAB-001"
+            "LAB RESULTS DATABASE#LAB-001#Hemoglobin"
           ],
           "data": {
             "test_name": "Complete Blood Count",
@@ -308,7 +315,7 @@
           "test_results",
           "critical_values"
         ],
-        "time_ms": 24419.729,
+        "time_ms": 20087.344,
         "raw_response": {
           "pending_tests": [
             "Chest X-Ray"
@@ -349,76 +356,80 @@
   },
   "issues": [
     {
-      "code": "DATA_INCONSISTENCY",
-      "title": "Financial Data Contradiction",
-      "severity": "high",
-      "message": "The 'Amount Covered by Insurance' is stated as ₹0.00, while the 'Patient's Balance' is ₹350,000.00 for a total bill of ₹400,000.00. This implies ₹50,000.00 was covered, directly contradicting the stated 'Amount Covered by Insurance'. This inconsistency needs immediate clarification.",
-      "suggested_action": "Reconcile financial records with the insurance provider and the hospital's billing department to clarify the actual covered amount and patient responsibility.",
-      "evidence": [
-        "Amount Covered by Insurance: ₹0.00, Patient's Balance: ₹350000.00, Total Hospital Bill: ₹400000.00"
-      ],
-      "data": {
-        "amount_covered_by_insurance": 0.0,
-        "patient_balance": 350000.0,
-        "total_bill": 400000.0
-      },
-      "agent": "Insurance"
-    },
-    {
-      "code": "INS_COVERAGE_NOT_APPLIED",
-      "title": "Approved Pre-authorization Not Reflected in Coverage",
+      "code": "INS_PARTIAL_COVERAGE",
+      "title": "Insurance Coverage Discrepancy",
       "severity": "critical",
-      "message": "Despite an active policy, cashless coverage type, and an approved pre-authorization for ₹500,000.00 (which is greater than the total bill of ₹400,000.00), the 'Amount Covered by Insurance' is reported as ₹0.00. This indicates that the expected insurance coverage has not been applied to the bill, preventing a smooth discharge.",
-      "suggested_action": "Contact Red Insurance immediately to ascertain why the approved pre-authorization has not resulted in coverage for the bill. Verify if all procedures billed align with the pre-authorized services and if any deductibles, co-pays, or non-covered services are impacting the claim.",
+      "message": "Despite an approved pre-authorization for ₹500,000 and sufficient annual limits, the insurance has covered ₹0.00 of the ₹400,000 hospital bill. This contradicts the expected cashless coverage based on the approved pre-authorization, leaving a significant patient balance of ₹350,000.",
+      "suggested_action": "Immediately contact Red Insurance to investigate why the approved pre-authorization amount has not been applied to the bill. Clarify the reason for ₹0.00 coverage and the patient's balance. Verify if any deductibles, co-pays, non-covered services, or processing errors account for this discrepancy. Patient discharge cannot proceed from an insurance perspective until this is resolved.",
       "evidence": [
-        "Policy Status: active, Coverage Type: Cashless, Pre-authorization Status: approved (PA-2024-00231), Approved Amount: 500000.0, Total Hospital Bill: 400000.0, Amount Covered by Insurance: 0.0"
+        "Pre-authorization (PA-2024-00231) approved for ₹500,000. Total Hospital Bill: ₹400,000. Amount Covered by Insurance: ₹0.00. Patient's Balance: ₹350,000. Coverage Type: Cashless."
       ],
       "data": {
-        "policy_status": "active",
-        "coverage_type": "Cashless",
-        "preauth_status": "approved",
+        "preauth_id": "PA-2024-00231",
         "preauth_approved_amount": 500000.0,
         "total_bill": 400000.0,
-        "amount_covered_by_insurance": 0.0
+        "insurance_covered": 0.0,
+        "patient_balance": 350000.0,
+        "remaining_annual_limit": 775000.0
       },
       "agent": "Insurance"
     },
     {
       "code": "PHARM_ORDER_PENDING",
-      "title": "Pharmacy Order Pending",
+      "title": "Medication Order Pending Dispense",
       "severity": "high",
-      "message": "The pharmacy order for Jondise (RX-002) is currently pending and has not been dispensed.",
-      "suggested_action": "Contact pharmacy to expedite dispensing of Jondise.",
+      "message": "Pharmacy order for Jondise (Ursodeoxycholic Acid) is pending and has not been dispensed for discharge.",
+      "suggested_action": "Follow up with pharmacy to expedite dispensing of Jondise.",
       "evidence": [],
       "data": {},
       "agent": "Pharmacy"
     },
     {
       "code": "PHARM_ORDER_PENDING",
-      "title": "Missing Pharmacy Order",
+      "title": "New Medication Order Not Dispensed",
       "severity": "high",
-      "message": "Insulin Glargine is listed as a discharge medication but no corresponding pharmacy order was found or processed.",
-      "suggested_action": "Create and process a pharmacy order for Insulin Glargine immediately.",
+      "message": "Insulin Glargine is a new discharge medication with no corresponding dispensed pharmacy order. It needs to be ordered and dispensed.",
+      "suggested_action": "Place an urgent pharmacy order for Insulin Glargine and ensure it is dispensed prior to discharge.",
       "evidence": [],
       "data": {},
       "agent": "Pharmacy"
     },
     {
       "code": "PHARM_ALLERGY_CONFLICT",
-      "title": "Potential Allergy Conflict",
+      "title": "Potential Allergy Conflict: Acetaminophen and Liver Complaint",
       "severity": "high",
-      "message": "Dolo-Crosine (Acetaminophen Extended) is prescribed for a patient with a known 'Liver complaint' allergy. Acetaminophen can be hepatotoxic.",
-      "suggested_action": "Review Dolo-Crosine prescription with prescribing physician. Consider alternative medication or dose adjustment, and ensure liver function monitoring is in place.",
+      "message": "Patient has a 'Liver complaint' allergy. Dolo-Crosine (generic: Acetaminophen Extended) is hepatotoxic and should be used with extreme caution or an alternative considered in patients with liver issues. The prescribed dosage of 654mg twice daily (1308mg/day) warrants careful review.",
+      "suggested_action": "Consult with the prescribing physician to review Dolo-Crosine (Acetaminophen) for a patient with a liver complaint. Consider an alternative pain relief medication or a lower, carefully monitored dose with liver function tests.",
       "evidence": [],
       "data": {},
       "agent": "Pharmacy"
     },
     {
       "code": "PHARM_PAYMENT_PENDING",
-      "title": "Payment Pending for Discharge Medications",
-      "severity": "high",
-      "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
-      "suggested_action": "Ensure patient or insurance clears payment for all discharge medications before release.",
+      "title": "Discharge Medication Payment Pending",
+      "severity": "medium",
+      "message": "Payment for Dolo-Crosine is pending for discharge.",
+      "suggested_action": "Coordinate with patient/billing department to clear payment for Dolo-Crosine.",
+      "evidence": [],
+      "data": {},
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "PHARM_PAYMENT_PENDING",
+      "title": "Discharge Medication Payment Pending",
+      "severity": "medium",
+      "message": "Payment for Jondise is pending for discharge.",
+      "suggested_action": "Coordinate with patient/billing department to clear payment for Jondise.",
+      "evidence": [],
+      "data": {},
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "PHARM_PAYMENT_PENDING",
+      "title": "Discharge Medication Payment Pending",
+      "severity": "medium",
+      "message": "Payment for Insulin Glargine is pending for discharge.",
+      "suggested_action": "Coordinate with patient/billing department to clear payment for Insulin Glargine.",
       "evidence": [],
       "data": {},
       "agent": "Pharmacy"
@@ -427,14 +438,12 @@
       "code": "TRANSPORT_REQUIRED",
       "title": "Ambulance Transport Required",
       "severity": "medium",
-      "message": "Patient has a serious condition (Liver Cancer) requiring medical supervision during transport. An ALS ambulance is recommended due to the diagnosis and existing condition of excess panting.",
-      "suggested_action": "Proceed with booking an ALS ambulance with City Emergency Ambulance (AMB-001).",
+      "message": "Patient has Liver Cancer and Excess Panting, indicating a serious condition requiring medical supervision and monitoring during transport. An ALS ambulance is recommended to ensure patient safety and appropriate care.",
+      "suggested_action": "Proceed with booking an ALS ambulance from an available provider.",
       "evidence": [],
       "data": {
-        "patient_diagnosis": "Liver Cancer",
-        "recommended_type": "ALS",
-        "provider_name": "City Emergency Ambulance",
         "provider_id": "AMB-001",
+        "vehicle_type": "ALS",
         "eta_minutes": 60
       },
       "agent": "Ambulance"
@@ -443,14 +452,15 @@
       "code": "BED_INVOICE_PENDING",
       "title": "Final Invoice Not Generated",
       "severity": "critical",
-      "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
-      "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are captured and approved.",
+      "message": "The final invoice for patient P00231 (Account ID: ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized invoice.",
+      "suggested_action": "Generate the final invoice to complete the billing process and enable patient discharge.",
       "evidence": [
-        "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        "BILLING_SNAPSHOT#invoice_status.invoice_generated"
       ],
       "data": {
         "patient_id": "P00231",
-        "account_id": "ACC-00231-2024"
+        "account_id": "ACC-00231-2024",
+        "invoice_generated": false
       },
       "agent": "Bed Management"
     },
@@ -458,14 +468,14 @@
       "code": "BED_BILLING_ADJUSTMENT",
       "title": "Pending Billing Adjustments",
       "severity": "high",
-      "message": "There are pending adjustments that need to be finalized before discharge. This includes insurance pre-authorization and dialysis procedure billing, which could impact the final patient responsibility.",
-      "suggested_action": "Expedite approval for insurance pre-authorization and finalize billing for the dialysis procedure. Update the patient's account accordingly.",
+      "message": "There are pending billing adjustments that need to be finalized. This includes an insurance pre-authorization pending approval and a dialysis procedure billing that is not yet finalized. These items may impact the final invoice.",
+      "suggested_action": "Expedite the approval process for the insurance pre-authorization and finalize all outstanding procedure billings to ensure an accurate and complete final invoice.",
       "evidence": [
-        "BILLING SNAPSHOT#pending_adjustments"
+        "BILLING_SNAPSHOT#pending_adjustments"
       ],
       "data": {
-        "pending_adjustments_count": 2,
-        "details": [
+        "pending_items_count": 2,
+        "pending_details": [
           {
             "description": "Insurance pre-authorization pending",
             "amount": 247500.0,
@@ -482,10 +492,10 @@
     },
     {
       "code": "LAB_PENDING",
-      "title": "Required lab test pending",
+      "title": "Required Chest X-Ray Pending",
       "severity": "high",
-      "message": "The 'Chest X-Ray' test is required for discharge but its status is 'pending'. It has not been completed before the discharge clearance time.",
-      "suggested_action": "Ensure Chest X-Ray is completed and results are reviewed by a physician before discharge.",
+      "message": "The required 'Chest X-Ray' test has a 'pending' status and has not been completed. Discharge cannot proceed until this test is completed and reviewed.",
+      "suggested_action": "Schedule and complete the Chest X-Ray immediately. Re-verify status upon completion.",
       "evidence": [
         "LAB RESULTS DATABASE#LAB-002"
       ],
@@ -497,12 +507,12 @@
     },
     {
       "code": "LAB_CRITICAL_VALUE",
-      "title": "Critical lab value detected",
+      "title": "Critical RBC Count",
       "severity": "critical",
-      "message": "RBC value of 2.8 10^6/uL is critically low (reference range: 4.5-5.9, critical threshold: 3.0).",
-      "suggested_action": "Consult with physician for immediate review and intervention regarding critical RBC level.",
+      "message": "Patient's Red Blood Cell (RBC) count is critically low at 2.8 10^6/uL (reference range: 4.5-5.9 10^6/uL), which is below the critical threshold of 3.0 10^6/uL. This requires immediate medical attention.",
+      "suggested_action": "Consult with physician immediately regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
       "evidence": [
-        "LAB RESULTS DATABASE#LAB-001"
+        "LAB RESULTS DATABASE#LAB-001#RBC"
       ],
       "data": {
         "test_name": "Complete Blood Count",
@@ -517,12 +527,12 @@
     },
     {
       "code": "LAB_CRITICAL_VALUE",
-      "title": "Critical lab value detected",
+      "title": "Critical Platelet Count",
       "severity": "critical",
-      "message": "Platelets value of 960 10^3/uL is critically high (reference range: 150-400, critical threshold: 450).",
-      "suggested_action": "Consult with physician for immediate review and intervention regarding critical Platelets level.",
+      "message": "Patient's Platelet count is critically high at 960 10^3/uL (reference range: 150-400 10^3/uL), which is above the critical threshold of 450 10^3/uL. This requires immediate medical attention.",
+      "suggested_action": "Consult with physician immediately regarding the critically high Platelet count. Further investigation or intervention may be required before discharge.",
       "evidence": [
-        "LAB RESULTS DATABASE#LAB-001"
+        "LAB RESULTS DATABASE#LAB-001#Platelets"
       ],
       "data": {
         "test_name": "Complete Blood Count",
@@ -537,12 +547,12 @@
     },
     {
       "code": "LAB_CRITICAL_VALUE",
-      "title": "Critical lab value detected",
+      "title": "Critical Hemoglobin Level",
       "severity": "critical",
-      "message": "Hemoglobin value of 8.2 g/dL is critically low (reference range: 13.5-17.5, critical threshold: 10.0).",
-      "suggested_action": "Consult with physician for immediate review and intervention regarding critical Hemoglobin level.",
+      "message": "Patient's Hemoglobin level is critically low at 8.2 g/dL (reference range: 13.5-17.5 g/dL), which is below the critical threshold of 10.0 g/dL. This requires immediate medical attention.",
+      "suggested_action": "Consult with physician immediately regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
       "evidence": [
-        "LAB RESULTS DATABASE#LAB-001"
+        "LAB RESULTS DATABASE#LAB-001#Hemoglobin"
       ],
       "data": {
         "test_name": "Complete Blood Count",
@@ -557,8 +567,8 @@
     }
   ],
   "metadata": {
-    "created_at": "2025-11-29T07:54:34.364181",
-    "last_updated": "2025-11-29T07:54:34.364181",
+    "created_at": "2025-11-29T08:14:49.084539",
+    "last_updated": "2025-11-29T08:14:49.084539",
     "version": "1.0"
   }
 }

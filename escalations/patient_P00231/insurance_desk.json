@@ -3,30 +3,30 @@
   "patient_id": "P00231",
   "alerts": [
     {
-      "alert_id": "ALERT-P00231-INS-002",
+      "alert_id": "ALERT-P00231-INS-001",
       "patient_id": "P00231",
       "department": "Insurance Desk",
       "priority": "urgent",
-      "issue_code": "INS_COVERAGE_NOT_APPLIED",
-      "issue_title": "Approved Pre-authorization Not Reflected in Coverage",
-      "message": "Despite an active policy, cashless coverage type, and an approved pre-authorization for ₹500,000.00 (which is greater than the total bill of ₹400,000.00), the 'Amount Covered by Insurance' is reported as ₹0.00. This indicates that the expected insurance coverage has not been applied to the bill, preventing a smooth discharge.",
-      "suggested_action": "Contact Red Insurance immediately to ascertain why the approved pre-authorization has not resulted in coverage for the bill. Verify if all procedures billed align with the pre-authorized services and if any deductibles, co-pays, or non-covered services are impacting the claim.",
+      "issue_code": "INS_PARTIAL_COVERAGE",
+      "issue_title": "Insurance Coverage Discrepancy",
+      "message": "Despite an approved pre-authorization for ₹500,000 and sufficient annual limits, the insurance has covered ₹0.00 of the ₹400,000 hospital bill. This contradicts the expected cashless coverage based on the approved pre-authorization, leaving a significant patient balance of ₹350,000.",
+      "suggested_action": "Immediately contact Red Insurance to investigate why the approved pre-authorization amount has not been applied to the bill. Clarify the reason for ₹0.00 coverage and the patient's balance. Verify if any deductibles, co-pays, non-covered services, or processing errors account for this discrepancy. Patient discharge cannot proceed from an insurance perspective until this is resolved.",
       "evidence": [
-        "Policy Status: active, Coverage Type: Cashless, Pre-authorization Status: approved (PA-2024-00231), Approved Amount: 500000.0, Total Hospital Bill: 400000.0, Amount Covered by Insurance: 0.0"
+        "Pre-authorization (PA-2024-00231) approved for ₹500,000. Total Hospital Bill: ₹400,000. Amount Covered by Insurance: ₹0.00. Patient's Balance: ₹350,000. Coverage Type: Cashless."
       ],
       "data": {
-        "policy_status": "active",
-        "coverage_type": "Cashless",
-        "preauth_status": "approved",
+        "preauth_id": "PA-2024-00231",
         "preauth_approved_amount": 500000.0,
         "total_bill": 400000.0,
-        "amount_covered_by_insurance": 0.0
+        "insurance_covered": 0.0,
+        "patient_balance": 350000.0,
+        "remaining_annual_limit": 775000.0
       },
-      "escalated_at": "2025-11-29T07:54:34.373233",
+      "escalated_at": "2025-11-29T08:14:49.091906",
       "status": "pending"
     }
   ],
   "total_alerts": 1,
   "highest_priority": "urgent",
-  "generated_at": "2025-11-29T07:54:34.374597"
+  "generated_at": "2025-11-29T08:14:49.096354"
 }

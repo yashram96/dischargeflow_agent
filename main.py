@@ -99,6 +99,155 @@ def print_decision_summary(final_state):
     print("\n" + "="*70 + "\n")
 
 
+def print_escalations(patient_id):
+    """Print escalation alerts in a beautiful format"""
+    import os
+    from pathlib import Path
+    
+    escalations_dir = Path("escalations") / f"patient_{patient_id}"
+    
+    if not escalations_dir.exists():
+        return
+    
+    print("\n" + "="*70)
+    print("🚨 DEPARTMENT ESCALATION ALERTS")
+    print("="*70)
+    
+    # Priority icons
+    priority_icons = {
+        "urgent": "🔴",
+        "high": "🟠",
+        "normal": "🟡",
+        "low": "🟢"
+    }
+    
+    # Department icons
+    dept_icons = {
+        "Lab Portal": "🔬",
+        "Pharmacy Portal": "💊",
+        "Billing Portal": "💰",
+        "Transport Services": "🚑",
+        "Insurance Desk": "📋",
+        "General Operations": "⚙️"
+    }
+    
+    # Read and display each department alert file
+    alert_files = sorted(escalations_dir.glob("*.json"))
+    
+    for alert_file in alert_files:
+        if alert_file.name == f"escalation_summary_{patient_id}.json":
+            continue  # Skip summary, we'll show it at the end
+        
+        if alert_file.name == "patient_notifications.json":
+            continue  # Skip patient notifications for now
+        
+        try:
+            with open(alert_file, 'r', encoding='utf-8') as f:
+                dept_data = json.load(f)
+            
+            department = dept_data.get("department", "Unknown")
+            alerts = dept_data.get("alerts", [])
+            total = dept_data.get("total_alerts", 0)
+            highest_priority = dept_data.get("highest_priority", "normal")
+            
+            if not alerts:
+                continue
+            
+            # Print department header
+            dept_icon = dept_icons.get(department, "📌")
+            priority_icon = priority_icons.get(highest_priority, "⚪")
+            
+            print(f"\n{dept_icon} {department.upper()} {priority_icon}")
+            print("─" * 70)
+            print(f"Total Alerts: {total} | Highest Priority: {highest_priority.upper()}")
+            print()
+            
+            # Print each alert
+            for i, alert in enumerate(alerts, 1):
+                priority = alert.get("priority", "normal")
+                title = alert.get("issue_title", "")
+                message = alert.get("message", "")
+                action = alert.get("suggested_action", "")
+                alert_id = alert.get("alert_id", "")
+                
+                print(f"  {priority_icons.get(priority, '⚪')} Alert #{i}: {title}")
+                print(f"     ID: {alert_id}")
+                print(f"     Priority: {priority.upper()}")
+                
+                # Wrap message to fit terminal width
+                if message:
+                    import textwrap
+                    wrapped_msg = textwrap.fill(message, width=65, initial_indent="     ", subsequent_indent="     ")
+                    print(f"     Issue: {message[:100]}{'...' if len(message) > 100 else ''}")
+                
+                if action:
+                    print(f"     ✓ Action: {action[:80]}{'...' if len(action) > 80 else ''}")
+                
+                print()
+        
+        except Exception as e:
+            print(f"  ⚠️  Error reading {alert_file.name}: {e}")
+    
+    # Print patient notifications if they exist
+    patient_notif_file = escalations_dir / "patient_notifications.json"
+    if patient_notif_file.exists():
+        try:
+            with open(patient_notif_file, 'r', encoding='utf-8') as f:
+                notif_data = json.load(f)
+            
+            notifications = notif_data.get("notifications", [])
+            
+            if notifications:
+                print(f"\n👤 PATIENT/FAMILY NOTIFICATIONS")
+                print("─" * 70)
+                print(f"Total Notifications: {len(notifications)}")
+                print()
+                
+                for i, notif in enumerate(notifications, 1):
+                    priority = notif.get("priority", "normal")
+                    title = notif.get("title", "")
+                    message = notif.get("message", "")
+                    
+                    print(f"  {priority_icons.get(priority, '⚪')} Notification #{i}: {title}")
+                    print(f"     {message}")
+                    print()
+        
+        except Exception as e:
+            print(f"  ⚠️  Error reading patient notifications: {e}")
+    
+    # Print escalation summary
+    summary_file = escalations_dir / f"escalation_summary_{patient_id}.json"
+    if summary_file.exists():
+        try:
+            with open(summary_file, 'r', encoding='utf-8') as f:
+                summary = json.load(f)
+            
+            print(f"\n📊 ESCALATION SUMMARY")
+            print("─" * 70)
+            print(f"Total Alerts: {summary.get('total_alerts', 0)}")
+            print(f"Departments Involved: {', '.join(summary.get('departments_involved', []))}")
+            
+            alerts_by_priority = summary.get('alerts_by_priority', {})
+            if alerts_by_priority:
+                print(f"\nAlerts by Priority:")
+                for priority in ["urgent", "high", "normal", "low"]:
+                    count = alerts_by_priority.get(priority, 0)
+                    if count > 0:
+                        print(f"  {priority_icons.get(priority, '⚪')} {priority.upper()}: {count}")
+            
+            dept_summary = summary.get('department_summary', {})
+            if dept_summary:
+                print(f"\nAlerts by Department:")
+                for dept, count in dept_summary.items():
+                    dept_icon = dept_icons.get(dept, "📌")
+                    print(f"  {dept_icon} {dept}: {count}")
+        
+        except Exception as e:
+            print(f"  ⚠️  Error reading escalation summary: {e}")
+    
+    print("\n" + "="*70 + "\n")
+
+
 def main():
     """Main application entry point"""
     print_banner()
@@ -128,6 +277,9 @@ def main():
         
         # Print summary
         print_decision_summary(final_state)
+        
+        # Print escalation alerts
+        print_escalations(patient_id)
         
         # Save final state to JSON for easy viewing
         output_file = Path("output") / f"final_decision_{patient_id}.json"
