@@ -4,7 +4,7 @@ from schemas.agent_schema import AgentOutputSchema
 from utils.file_utils import read_json_file, format_evidence_path
 import google.generativeai as genai
 import json
-
+from config import Config
 
 class PharmacyAgent(BaseAgent):
     """
@@ -17,7 +17,7 @@ class PharmacyAgent(BaseAgent):
         
         if api_key:
             genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
         
     def verify(self, patient_id: str, **kwargs) -> AgentOutputSchema:
         """Verify pharmacy requirements for discharge"""
@@ -37,8 +37,36 @@ class PharmacyAgent(BaseAgent):
         prompt = self._build_verification_prompt(patient_data, pharmacy_inventory, drug_interactions)
         
         try:
-            response = self.model.generate_content(prompt)
+            # print("  Calling Gemini API for pharmacy verification...")
+            
+            generation_config = {
+                "temperature": 0.1,
+                "max_output_tokens": 8192,
+                "response_mime_type": "application/json"
+            }
+            
+            response = self.model.generate_content(
+                prompt,
+                generation_config=generation_config
+            )
+            
+            # print("  Gemini API response received, parsing...")
+            
+            # Debug response
+            # print(f"  DEBUG - Response: {response}")
+            # if hasattr(response, 'candidates') and response.candidates:
+            #     print(f"  DEBUG - Finish reason: {response.candidates[0].finish_reason}")
+            
+            # Check if response has text
+            if not response or not response.text:
+                print("  ✗ Gemini API returned empty response")
+                print("  → Falling back to rule-based verification...")
+                return self._fallback_verification(patient_data, pharmacy_inventory, drug_interactions)
+            
+            # print(f"  DEBUG - Response text: {response.text[:200]}...")
             result = self._parse_gemini_response(response.text)
+            
+            print(f"  ✓ Pharmacy verification complete (NOC: {result['noc']})")
             
             return self.create_output(
                 noc=result["noc"],
@@ -48,66 +76,42 @@ class PharmacyAgent(BaseAgent):
             )
             
         except Exception as e:
-            print(f"Gemini API error in PharmacyAgent: {e}")
+            print(f"  ✗ Gemini API error: {type(e).__name__}: {str(e)}")
+            print(f"  → Falling back to rule-based verification...")
             return self._fallback_verification(patient_data, pharmacy_inventory, drug_interactions)
     
     def _build_verification_prompt(self, patient_data: Dict, pharmacy_inventory: Dict, drug_interactions: Dict) -> str:
         """Build verification prompt for Gemini"""
         
-        return f"""You are a Pharmacy Verification Agent for hospital discharge. 
-Verify medication safety and readiness for patient discharge.
+        medications = patient_data.get("Medications", {}).get("Active Medications", [])
+        allergies = patient_data.get("Patient Information", {}).get("Allergies", "None")
+        
+        return f"""Review this patient's medication status for hospital discharge clearance.
 
-PATIENT MEDICATIONS:
-{json.dumps(patient_data.get("Medications", {}), indent=2)}
+Current Medications:
+{json.dumps(medications, indent=2)[:700]}
 
-PATIENT ALLERGIES:
-{patient_data.get("Patient Information", {}).get("Allergies", "None")}
+Known Allergies: {allergies}
 
-PHARMACY INVENTORY & ORDERS:
-{json.dumps(pharmacy_inventory, indent=2)}
+Pharmacy Order Status:
+{json.dumps(pharmacy_inventory.get("active_orders", []), indent=2)[:700]}
 
-DRUG INTERACTION RULES:
-{json.dumps(drug_interactions, indent=2)}
+Discharge Prescriptions:
+{json.dumps(pharmacy_inventory.get("discharge_medications", []), indent=2)[:500]}
 
-VERIFICATION TASKS:
-1. Check for pending medication orders (status != "dispensed")
-2. Verify no allergy-medication conflicts
-3. Check for critical drug interactions
-4. Verify discharge medication payment status
-5. Check for duplicate medications
+Please verify:
+1. Have all medication orders been filled and dispensed?
+2. Are there any conflicts between medications and patient allergies?
+3. Are there duplicate medications prescribed?
+4. Is payment cleared for discharge medications?
 
-OUTPUT REQUIREMENTS:
-Return ONLY valid JSON (no markdown, no explanation):
-{{
-  "noc": true or false,
-  "confidence": 0.0 to 1.0,
-  "issues": [
-    {{
-      "code": "ISSUE_CODE",
-      "title": "Short title",
-      "severity": "low|medium|high|critical",
-      "message": "Detailed explanation",
-      "suggested_action": "What to do",
-      "evidence": ["file_path#reference"],
-      "data": {{"key": "value"}}
-    }}
-  ],
-  "raw_data": {{
-    "pending_orders": [],
-    "allergy_conflicts": [],
-    "interactions_found": []
-  }}
-}}
+Respond with a JSON assessment containing:
+- noc: true if pharmacy clears discharge, false if issues block it
+- confidence: your confidence level (0-1)
+- issues: list any problems (with code, title, severity, message, suggested_action)
+- raw_data: summary with pending_orders, allergy_conflicts, interactions_found arrays
 
-ISSUE CODES:
-- PHARM_ORDER_PENDING: Medication order not dispensed
-- PHARM_ALLERGY_CONFLICT: Medication conflicts with allergy
-- PHARM_INTERACTION_CRITICAL: Critical drug interaction found
-- PHARM_PAYMENT_PENDING: Discharge medication payment required
-- PHARM_DUPLICATE: Duplicate medications detected
-
-Set noc=false for critical issues (allergy conflicts, critical interactions, pending orders).
-Set noc=true if all medications dispensed and no critical safety issues.
+Common issue codes: PHARM_ORDER_PENDING, PHARM_ALLERGY_CONFLICT, PHARM_PAYMENT_PENDING, PHARM_DUPLICATE
 """
     
     def _parse_gemini_response(self, response_text: str) -> Dict[str, Any]:
@@ -126,13 +130,25 @@ Set noc=true if all medications dispensed and no critical safety issues.
             
             issues = []
             for issue_data in result.get("issues", []):
+                # Normalize severity
+                severity = issue_data.get("severity", "medium").lower()
+                if severity not in ["low", "medium", "high", "critical"]:
+                    severity = "medium"
+                
+                # Normalize evidence
+                evidence = issue_data.get("evidence", [])
+                if isinstance(evidence, dict):
+                    evidence = [f"{k}: {v}" for k, v in evidence.items()]
+                elif isinstance(evidence, str):
+                    evidence = [evidence]
+
                 issues.append(self.create_issue(
                     code=issue_data["code"],
                     title=issue_data["title"],
-                    severity=issue_data["severity"],
+                    severity=severity,
                     message=issue_data["message"],
                     suggested_action=issue_data["suggested_action"],
-                    evidence=issue_data.get("evidence", []),
+                    evidence=evidence,
                     data=issue_data.get("data", {})
                 ))
             

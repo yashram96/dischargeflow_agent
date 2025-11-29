@@ -61,5 +61,982 @@
       "Collect ₹4450.0 from patient/family before discharge",
       "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)"
     ]
+  },
+  {
+    "timestamp": "2025-11-29T05:05:30.785652",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)"
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T05:42:08.238318",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 has not yet been generated. This prevents final billing and discharge processing, as all charges must be finalized before discharge.",
+        "suggested_action": "Coordinate immediately with the billing department to finalize all charges and generate the final invoice. This is a critical step for discharge.",
+        "evidence": [
+          "BILLING_SNAPSHOT.invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical RBC Value",
+        "severity": "critical",
+        "message": "The Red Blood Cell (RBC) count is critically low at 2.8 (10^6/uL). The reference range is 4.5-5.9 (10^6/uL), and the critical threshold is <3.0 (10^6/uL). This requires immediate medical attention.",
+        "suggested_action": "Consult with the physician immediately regarding the critically low RBC count. Further investigation and intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0]#components[1]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Platelet Value",
+        "severity": "critical",
+        "message": "The Platelet count is critically high at 960 (10^3/uL). The reference range is 150-400 (10^3/uL), and the critical threshold is >450 (10^3/uL). This requires immediate medical attention.",
+        "suggested_action": "Consult with the physician immediately regarding the critically high platelet count (thrombocytosis). Further investigation and intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0]#components[2]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Hemoglobin Value",
+        "severity": "critical",
+        "message": "The Hemoglobin level is critically low at 8.2 g/dL. The reference range is 13.5-17.5 g/dL, and the laboratory's critical threshold is <10.0 g/dL. This requires immediate medical attention.",
+        "suggested_action": "Consult with the physician immediately regarding the critically low Hemoglobin level. Further investigation and intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0]#components[3]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Book an ALS ambulance. City Emergency Ambulance (AMB-001) is available with an ETA of 60 minutes."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:06:55.508251",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 10,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 has not been generated. A final invoice is required to reconcile all charges and payments before discharge.",
+        "suggested_action": "Immediately contact the billing department to finalize and generate the invoice. Discharge cannot proceed without this step.",
+        "evidence": [
+          "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false,
+          "final_invoice_id": null
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Proceed with booking an ALS ambulance."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:20:33.686983",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Proceed with booking an ALS ambulance from an available provider."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:35:00.714845",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 has not yet been generated. Discharge cannot proceed without a finalized bill, as this is a critical step for financial closure.",
+        "suggested_action": "Immediately generate the final invoice, ensuring all charges from the 'BILLING SNAPSHOT' are accurately reflected and finalized.",
+        "evidence": [
+          "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false,
+          "patient_id": "P00231"
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_PENDING",
+        "title": "Required Chest X-Ray is Pending",
+        "severity": "critical",
+        "message": "The required 'Chest X-Ray' test has a status of 'pending' and has not been completed. This test is crucial for discharge clearance and must be completed before the patient can be discharged.",
+        "suggested_action": "Follow up with the radiology department to expedite the completion and reporting of the Chest X-Ray. Discharge cannot proceed until this test is completed and reviewed.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-002"
+        ],
+        "data": {
+          "test_name": "Chest X-Ray",
+          "status": "pending"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical RBC Count",
+        "severity": "critical",
+        "message": "The Red Blood Cell (RBC) count from the Complete Blood Count is critically low at 2.8 10^6/uL. The critical threshold is 3.0 10^6/uL, and the normal reference range is 4.5-5.9 10^6/uL.",
+        "suggested_action": "Review patient's clinical status, investigate potential causes for low RBC, and consider appropriate medical intervention or further diagnostic tests before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical",
+          "critical_threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Platelet Count",
+        "severity": "critical",
+        "message": "The Platelet count from the Complete Blood Count is critically high at 960 10^3/uL. The critical threshold is 450 10^3/uL, and the normal reference range is 150-400 10^3/uL.",
+        "suggested_action": "Review patient's clinical status, investigate potential causes for high platelets (thrombocytosis), and consider appropriate medical intervention or further diagnostic tests before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical",
+          "critical_threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Hemoglobin Level",
+        "severity": "critical",
+        "message": "The Hemoglobin level from the Complete Blood Count is critically low at 8.2 g/dL. The critical threshold for this patient's context is 10.0 g/dL, and the normal reference range is 13.5-17.5 g/dL.",
+        "suggested_action": "Review patient's clinical status, investigate potential causes for low hemoglobin, and consider appropriate medical intervention or further diagnostic tests before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical",
+          "critical_threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Book an ALS ambulance with City Emergency Ambulance (AMB-001).",
+      "Expedite the approval of the insurance pre-authorization and finalize all pending procedure billings to ensure the final invoice is accurate."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:39:14.461101",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 9,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
+        "suggested_action": "Generate the final invoice for patient P00231.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "patient_id": "P00231",
+          "account_id": "ACC-00231-2024",
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_PENDING",
+        "title": "Required test pending",
+        "severity": "critical",
+        "message": "The required 'Chest X-Ray' test has a 'pending' status and is not yet completed. Discharge cannot proceed until this test is finalized.",
+        "suggested_action": "Follow up with the radiology department to expedite Chest X-Ray completion and review results.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[1].status"
+        ],
+        "data": {
+          "test_name": "Chest X-Ray",
+          "status": "pending"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical RBC value",
+        "severity": "critical",
+        "message": "Red Blood Cell (RBC) count is critically low at 2.8 10^6/uL. The reference range is 4.5-5.9 10^6/uL, and the general critical threshold is <3.0 10^6/uL.",
+        "suggested_action": "Review patient's clinical status, investigate the cause of low RBC, and consider appropriate medical intervention before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[0].components[1]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Platelet count",
+        "severity": "critical",
+        "message": "Platelet count is critically high at 960 10^3/uL. The reference range is 150-400 10^3/uL, and the general critical threshold is >450 10^3/uL.",
+        "suggested_action": "Review patient's clinical status, investigate the cause of high platelets, and consider appropriate medical intervention before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[0].components[2]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Collect ₹4450.0 from patient/family before discharge",
+      "Proceed with booking an ALS ambulance for the patient."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:41:54.508178",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 15,
+    "critical_issues": [
+      {
+        "code": "INS_PARTIAL_COVERAGE",
+        "title": "Approved Pre-authorization Not Reflected in Covered Amount",
+        "severity": "critical",
+        "message": "Despite an approved pre-authorization (PA-2024-00231) for ₹300,000, the 'Amount Covered by Insurance' is stated as ₹0.00. This discrepancy indicates a critical issue with claim processing or the application of the pre-authorization, leading to a significant patient balance.",
+        "suggested_action": "Immediately contact Red Insurance to investigate why the approved pre-authorization amount of ₹300,000 has not been applied to the total bill and to expedite claim processing. Obtain clarification on the claim status.",
+        "evidence": [
+          "Pre-Authorization Records: PA-2024-00231 (status: approved, approved_amount: ₹300,000); Financial Details: Amount Covered by Insurance: ₹0.00."
+        ],
+        "data": {
+          "preauth_approved_amount": 300000.0,
+          "insurance_covered_amount": 0.0,
+          "patient_balance_from_data": 350000.0,
+          "total_bill": 400000.0
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "PHARM_ORDER_PENDING",
+        "title": "Discharge Medication Not Processed",
+        "severity": "critical",
+        "message": "Insulin Glargine is prescribed for discharge but has no corresponding entry in the pharmacy order status, indicating it has not been ordered or dispensed.",
+        "suggested_action": "Verify Insulin Glargine order with prescribing physician and pharmacy immediately. Ensure it is ordered and dispensed before discharge.",
+        "evidence": [],
+        "data": {},
+        "agent": "Pharmacy"
+      },
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized invoice.",
+        "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are captured and approved.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_PENDING",
+        "title": "Required test pending",
+        "severity": "critical",
+        "message": "The 'Chest X-Ray' is a required test for discharge but its status is 'pending'. It has not been completed before the discharge clearance time of 2024-01-29T10:00:00.",
+        "suggested_action": "Expedite the Chest X-Ray completion and review results before discharge. Discharge cannot proceed until all required tests are completed.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[1]"
+        ],
+        "data": {
+          "test_name": "Chest X-Ray",
+          "status": "pending",
+          "required_for_discharge": true
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected: RBC",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical RBC value of 2.8 10^6/uL. The reference range is 4.5-5.9 10^6/uL, and the critical threshold is 3.0 10^6/uL. This value is below the critical threshold.",
+        "suggested_action": "Consult with physician regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[1]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical",
+          "critical_threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected: Platelets",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical Platelets value of 960 10^3/uL. The reference range is 150-400 10^3/uL, and the critical threshold is 450 10^3/uL. This value is above the critical threshold.",
+        "suggested_action": "Consult with physician regarding the critically high Platelets count. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[2]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical",
+          "critical_threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected: Hemoglobin",
+        "severity": "critical",
+        "message": "Complete Blood Count shows a critical Hemoglobin value of 8.2 g/dL. The reference range is 13.5-17.5 g/dL, and the critical threshold is 10.0 g/dL. This value is below the critical threshold.",
+        "suggested_action": "Consult with physician regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[3]"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical",
+          "critical_threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Clarify the source of the ₹50,000 difference between the total bill minus insurance coverage and the stated patient's balance.",
+      "Coordinate with patient financial services and the patient to clear payment for Dolo-Crosine.",
+      "Coordinate with patient financial services and the patient to clear payment for Jondise.",
+      "Coordinate with patient financial services and the patient to clear payment for Insulin Glargine.",
+      "Proceed with booking AMB-001 for ALS transport."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:50:39.801182",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 15,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized bill.",
+        "suggested_action": "Generate the final invoice immediately and ensure all charges are accurately reflected. Verify all pending adjustments are resolved before finalization.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false,
+          "status": "pending"
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical RBC Value in Complete Blood Count",
+        "severity": "critical",
+        "message": "The Red Blood Cell (RBC) count is critically low at 2.8 10^6/uL. The reference range is 4.5-5.9 10^6/uL, and the critical threshold is 3.0 10^6/uL. This value is below the critical threshold.",
+        "suggested_action": "Consult with the attending physician immediately regarding the critically low RBC count. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[0].components[1]#value"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical",
+          "critical_threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Platelet Count in Complete Blood Count",
+        "severity": "critical",
+        "message": "The Platelet count is critically high at 960 10^3/uL. The reference range is 150-400 10^3/uL, and the critical threshold is 450 10^3/uL. This value is significantly above the critical threshold.",
+        "suggested_action": "Consult with the attending physician immediately regarding the critically high Platelet count. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[0].components[2]#value"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical",
+          "critical_threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Hemoglobin Value in Complete Blood Count",
+        "severity": "critical",
+        "message": "The Hemoglobin level is critically low at 8.2 g/dL. The reference range is 13.5-17.5 g/dL, and the critical threshold is 10.0 g/dL. This value is below the critical threshold.",
+        "suggested_action": "Consult with the attending physician immediately regarding the critically low Hemoglobin level. Further investigation or intervention may be required before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE.results[0].components[3]#value"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical",
+          "critical_threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Review if an amendment to the existing pre-authorization or a new pre-authorization is required for the remaining amount. Verify if the services rendered exceeded the scope of the initial approval.",
+      "Proceed with booking an ALS ambulance for the patient from City Emergency Ambulance (AMB-001).",
+      "Expedite the approval of insurance pre-authorization (₹247,500.00) and finalize the billing for the dialysis procedure (₹75,000.00)."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:56:04.910186",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 16,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated, which is a critical step required for discharge.",
+        "suggested_action": "Generate the final invoice and ensure all charges are finalized before proceeding with discharge.",
+        "evidence": [
+          "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "The test component 'RBC' for 'Complete Blood Count' shows a critical value of 2.8 10^6/uL (Reference: 4.5-5.9).",
+        "suggested_action": "Consult with physician immediately regarding critical 'RBC' result. Do not discharge until addressed.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[1].flag"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "The test component 'Platelets' for 'Complete Blood Count' shows a critical value of 960 10^3/uL (Reference: 150-400).",
+        "suggested_action": "Consult with physician immediately regarding critical 'Platelets' result. Do not discharge until addressed.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[2].flag"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical lab value detected",
+        "severity": "critical",
+        "message": "The test component 'Hemoglobin' for 'Complete Blood Count' shows a critical value of 8.2 g/dL (Reference: 13.5-17.5).",
+        "suggested_action": "Consult with physician immediately regarding critical 'Hemoglobin' result. Do not discharge until addressed.",
+        "evidence": [
+          "LAB RESULTS DATABASE#results[0].components[3].flag"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component_name": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5"
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Once the pre-authorization application issue is resolved, inform the patient of their remaining financial responsibility of ₹100,000. Explore options for additional coverage or payment plans if applicable.",
+      "Ensure patient or responsible party clears payment for Dolo-Crosine before discharge.",
+      "Ensure patient or responsible party clears payment for Jondise before discharge.",
+      "Ensure patient or responsible party clears payment for Insulin Glargine before discharge.",
+      "Book an ALS ambulance with an available provider."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T06:59:29.606230",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 17,
+    "critical_issues": [
+      {
+        "code": "INS_PARTIAL_COVERAGE",
+        "title": "Partial Insurance Coverage",
+        "severity": "critical",
+        "message": "The approved pre-authorization amount (₹300,000.00) is less than the total hospital bill (₹400,000.00), resulting in a patient balance of ₹100,000.00.",
+        "suggested_action": "Patient or guarantor needs to settle the remaining balance of ₹100,000.00 or appeal for additional coverage. Discharge cannot be fully cleared from an insurance perspective until this balance is addressed.",
+        "evidence": [
+          "Pre-authorization PA-2024-00231 approved for ₹300,000.00, while the Total Hospital Bill is ₹400,000.00."
+        ],
+        "data": {
+          "approved_amount": 300000.0,
+          "total_bill": 400000.0,
+          "patient_balance_due": 100000.0
+        },
+        "agent": "Insurance"
+      },
+      {
+        "code": "PHARM_ALLERGY_CONFLICT",
+        "title": "Medication-Allergy Conflict",
+        "severity": "critical",
+        "message": "Patient has a 'Liver complaint' allergy, and Dolo-Crosine (Acetaminophen Extended) is prescribed. Acetaminophen is known to be hepatotoxic and should be used with extreme caution or avoided in patients with liver issues.",
+        "suggested_action": "Review Dolo-Crosine prescription with prescribing physician. Consider alternative pain management or a lower, safer dose with close liver function monitoring, or discontinuation if appropriate.",
+        "evidence": [],
+        "data": {},
+        "agent": "Pharmacy"
+      },
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (ACC-00231-2024) has not yet been generated. Discharge cannot proceed without a finalized bill.",
+        "suggested_action": "Generate the final invoice for patient P00231.",
+        "evidence": [
+          "BILLING SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "patient_id": "P00231",
+          "account_id": "ACC-00231-2024"
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_PENDING",
+        "title": "Required Chest X-Ray is Pending",
+        "severity": "critical",
+        "message": "The required 'Chest X-Ray' test has a status of 'pending' and has not been completed.",
+        "suggested_action": "Ensure Chest X-Ray is completed and results are reviewed before discharge.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-002"
+        ],
+        "data": {
+          "test_name": "Chest X-Ray",
+          "status": "pending"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical RBC Value",
+        "severity": "critical",
+        "message": "Red Blood Cell (RBC) count is critically low (2.8 10^6/uL). Reference range: 4.5-5.9 10^6/uL. Critical threshold: 3.0 10^6/uL.",
+        "suggested_action": "Review RBC results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#RBC"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "units": "10^6/uL",
+          "reference_range": "4.5-5.9",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Platelets Value",
+        "severity": "critical",
+        "message": "Platelet count is critically high (960 10^3/uL). Reference range: 150-400 10^3/uL. Critical threshold: 450 10^3/uL.",
+        "suggested_action": "Review Platelets results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#Platelets"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "units": "10^3/uL",
+          "reference_range": "150-400",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Hemoglobin Value",
+        "severity": "critical",
+        "message": "Hemoglobin is critically low (8.2 g/dL). Reference range: 13.5-17.5 g/dL. Critical threshold: 10.0 g/dL.",
+        "suggested_action": "Review Hemoglobin results with a physician and determine appropriate medical intervention or further investigation.",
+        "evidence": [
+          "LAB RESULTS DATABASE#LAB-001#Hemoglobin"
+        ],
+        "data": {
+          "test_name": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "units": "g/dL",
+          "reference_range": "13.5-17.5",
+          "flag": "critical"
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Inform patient/billing department to clear payment for Dolo-Crosine.",
+      "Inform patient/billing department to clear payment for Jondise.",
+      "Inform patient/billing department to clear payment for Insulin Glargine.",
+      "Proceed with booking an ALS ambulance from City Emergency Ambulance (AMB-001)."
+    ]
+  },
+  {
+    "timestamp": "2025-11-29T07:02:47.270248",
+    "patient_id": "P00231",
+    "final_decision": "HOLD",
+    "issues_count": 12,
+    "critical_issues": [
+      {
+        "code": "BED_INVOICE_PENDING",
+        "title": "Final Invoice Not Generated",
+        "severity": "critical",
+        "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated, which is a critical prerequisite for discharge. This prevents final billing verification and payment processing.",
+        "suggested_action": "Contact the billing department immediately to finalize all charges and generate the final invoice for patient P00231.",
+        "evidence": [
+          "BILLING_SNAPSHOT#invoice_status.invoice_generated"
+        ],
+        "data": {
+          "invoice_generated": false
+        },
+        "agent": "Bed Management"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: RBC",
+        "severity": "critical",
+        "message": "RBC = 2.8 10^6/uL (Reference: 4.5-5.9)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "RBC",
+          "value": 2.8,
+          "threshold": 3.0
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Platelets",
+        "severity": "critical",
+        "message": "Platelets = 960 10^3/uL (Reference: 150-400)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Platelets",
+          "value": 960,
+          "threshold": 450
+        },
+        "agent": "Lab"
+      },
+      {
+        "code": "LAB_CRITICAL_VALUE",
+        "title": "Critical Value: Hemoglobin",
+        "severity": "critical",
+        "message": "Hemoglobin = 8.2 g/dL (Reference: 13.5-17.5)",
+        "suggested_action": "Consult physician before discharge - critical lab value requires review",
+        "evidence": [
+          "data/lab_results.json#results[LAB-001].components"
+        ],
+        "data": {
+          "test": "Complete Blood Count",
+          "component": "Hemoglobin",
+          "value": 8.2,
+          "threshold": 10.0
+        },
+        "agent": "Lab"
+      }
+    ],
+    "recommended_next_steps": [
+      "Proceed with booking an ALS ambulance."
+    ]
   }
 ]

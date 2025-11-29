@@ -6,7 +6,7 @@ import json
 from schemas.agent_schema import CoordinatorDecisionSchema
 from coordinator.state_manager import StateManager
 from utils.file_utils import get_iso_timestamp
-
+from config import Config
 
 class CoordinatorAgent:
     """
@@ -23,7 +23,7 @@ class CoordinatorAgent:
         """
         if api_key:
             genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
         self.state_manager = StateManager()
     
     def coordinate(
@@ -69,7 +69,7 @@ class CoordinatorAgent:
         # Apply decision rules
         final_decision, approved = self._apply_decision_rules(all_issues, agent_outputs)
         
-        # Generate discharge summary using Gemini
+        # Generate discharge summary
         discharge_summary = self._generate_discharge_summary(
             patient_id, agent_outputs, all_issues, final_decision
         )
@@ -152,17 +152,17 @@ class CoordinatorAgent:
         all_issues: List[Dict[str, Any]],
         final_decision: str
     ) -> Dict[str, str]:
-        """Generate discharge summary using Gemini"""
+        """Generate discharge summary using Gemini API"""
         
         prompt = f"""You are a Discharge Coordinator. Generate a discharge summary based on agent verifications.
 
 PATIENT ID: {patient_id}
 
 AGENT OUTPUTS:
-{json.dumps(agent_outputs, indent=2)}
+{json.dumps(agent_outputs, indent=2)[:1000]}
 
 ALL ISSUES:
-{json.dumps(all_issues, indent=2)}
+{json.dumps(all_issues, indent=2)[:1000]}
 
 FINAL DECISION: {final_decision}
 
@@ -188,7 +188,11 @@ Return ONLY valid JSON (no markdown):
 """
         
         try:
-            response = self.model.generate_content(prompt)
+            print("  Generating discharge summary with Gemini API...")
+            response = self.model.generate_content(
+                prompt,
+                request_options={"timeout": 30}
+            )
             cleaned = response.text.strip()
             if cleaned.startswith("```json"):
                 cleaned = cleaned[7:]
@@ -198,9 +202,12 @@ Return ONLY valid JSON (no markdown):
                 cleaned = cleaned[:-3]
             cleaned = cleaned.strip()
             
-            return json.loads(cleaned)
+            summary = json.loads(cleaned)
+            print("  ✓ Discharge summary generated")
+            return summary
         except Exception as e:
-            print(f"Error generating summary with Gemini: {e}")
+            print(f"  ✗ Gemini API error: {type(e).__name__}: {str(e)}")
+            print(f"  → Using fallback summary generation...")
             return self._fallback_summary(final_decision, all_issues)
     
     def _fallback_summary(self, final_decision: str, all_issues: List[Dict[str, Any]]) -> Dict[str, str]:

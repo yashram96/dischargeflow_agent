@@ -4,7 +4,7 @@ from schemas.agent_schema import AgentOutputSchema
 from utils.file_utils import read_json_file, format_evidence_path
 import google.generativeai as genai
 import json
-
+from config import Config
 
 class BedManagementAgent(BaseAgent):
     """
@@ -17,7 +17,7 @@ class BedManagementAgent(BaseAgent):
         
         if api_key:
             genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
         
     def verify(self, patient_id: str, **kwargs) -> AgentOutputSchema:
         """Verify bed and billing requirements"""
@@ -36,8 +36,22 @@ class BedManagementAgent(BaseAgent):
         prompt = self._build_verification_prompt(patient_data, billing_snapshot, housekeeping_schedule)
         
         try:
-            response = self.model.generate_content(prompt)
+            # print("  Calling Gemini API for bed management verification...")
+            
+            generation_config = {
+                "temperature": 0.1,
+                "max_output_tokens": 8192,
+                "response_mime_type": "application/json"
+            }
+            
+            response = self.model.generate_content(
+                prompt,
+                generation_config=generation_config
+            )
+            
+            print("  Gemini API response received, parsing...")
             result = self._parse_gemini_response(response.text)
+            print(f"  ✓ Bed management verification complete (NOC: {result['noc']})")
             
             return self.create_output(
                 noc=result["noc"],
@@ -47,7 +61,8 @@ class BedManagementAgent(BaseAgent):
             )
             
         except Exception as e:
-            print(f"Gemini API error in BedManagementAgent: {e}")
+            print(f"  ✗ Gemini API error: {type(e).__name__}: {str(e)}")
+            print(f"  → Falling back to rule-based verification...")
             return self._fallback_verification(patient_data, billing_snapshot, housekeeping_schedule)
     
     def _build_verification_prompt(self, patient_data: Dict, billing_snapshot: Dict, housekeeping_schedule: Dict) -> str:
@@ -123,13 +138,25 @@ Set noc=true if billing complete and deposit sufficient (or refund due).
             
             issues = []
             for issue_data in result.get("issues", []):
+                # Normalize severity
+                severity = issue_data.get("severity", "medium").lower()
+                if severity not in ["low", "medium", "high", "critical"]:
+                    severity = "medium"
+                
+                # Normalize evidence
+                evidence = issue_data.get("evidence", [])
+                if isinstance(evidence, dict):
+                    evidence = [f"{k}: {v}" for k, v in evidence.items()]
+                elif isinstance(evidence, str):
+                    evidence = [evidence]
+
                 issues.append(self.create_issue(
                     code=issue_data["code"],
                     title=issue_data["title"],
-                    severity=issue_data["severity"],
+                    severity=severity,
                     message=issue_data["message"],
                     suggested_action=issue_data["suggested_action"],
-                    evidence=issue_data.get("evidence", []),
+                    evidence=evidence,
                     data=issue_data.get("data", {})
                 ))
             

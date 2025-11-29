@@ -7,6 +7,8 @@ import json
 import os
 
 
+from config import Config
+
 class InsuranceAgent(BaseAgent):
     """
     Insurance verification agent that checks policy status, coverage, 
@@ -19,7 +21,7 @@ class InsuranceAgent(BaseAgent):
         # Configure Gemini API
         if api_key:
             genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
         
     def verify(self, patient_id: str, **kwargs) -> AgentOutputSchema:
         """
@@ -52,10 +54,41 @@ class InsuranceAgent(BaseAgent):
         # Build prompt for Gemini
         prompt = self._build_verification_prompt(patient_data, insurer_records, policy_text)
         
+        # Try Gemini API
         try:
-            # Call Gemini API
-            response = self.model.generate_content(prompt)
+            # print("  Calling Gemini API for insurance verification...")
+            
+            # Set generation config
+            generation_config = {
+                "temperature": 0.1,
+                "top_p": 0.95,
+                "top_k": 40,
+                "max_output_tokens": 8192,
+                "response_mime_type": "application/json"
+            }
+            
+            response = self.model.generate_content(
+                prompt,
+                generation_config=generation_config
+            )
+            
+            print("  Gemini API response received, parsing...")
+            
+            # Debug: Print full response details
+            # print(f"  DEBUG - Response object: {response}")
+            # if hasattr(response, 'candidates') and response.candidates:
+            #     print(f"  DEBUG - Finish reason: {response.candidates[0].finish_reason}")
+            
+            # Check if response has text
+            if not response or not response.text:
+                print("  ✗ Gemini API returned empty response")
+                print("  → Falling back to rule-based verification...")
+                return self._fallback_verification(patient_data, insurer_records)
+            
+            # print(f"  DEBUG - Response text: {response.text[:200]}...")
             result = self._parse_gemini_response(response.text)
+            
+            print(f"  ✓ Insurance verification complete (NOC: {result['noc']})")
             
             return self.create_output(
                 noc=result["noc"],
@@ -65,66 +98,50 @@ class InsuranceAgent(BaseAgent):
             )
             
         except Exception as e:
-            # Fallback to rule-based verification
+            print(f"  ✗ Gemini API error: {type(e).__name__}: {str(e)}")
+            print(f"  → Falling back to rule-based verification...")
             return self._fallback_verification(patient_data, insurer_records)
     
     def _build_verification_prompt(self, patient_data: Dict, insurer_records: Dict, policy_text: str) -> str:
         """Build the prompt for Gemini API"""
         
-        return f"""You are an Insurance Verification Agent for a hospital discharge system. 
-Analyze the following data and determine if the patient's insurance provides No Objection Certificate (NOC) for discharge.
+        insurance_details = patient_data.get("Insurance Details", {})
+        billing = patient_data.get("Billing", {})
+        
+        return f"""Analyze this insurance verification case and provide your assessment in JSON format.
 
-PATIENT DATA:
-{json.dumps(patient_data.get("Insurance Details", {}), indent=2)}
+Patient's Insurance Information:
+- Policy: {insurance_details.get("Provider Information", {}).get("Policy Number", "N/A")}
+- Provider: {insurance_details.get("Provider Information", {}).get("Provider", "N/A")}
+- Policy Status: {insurer_records.get("policy_details", {}).get("policy_status", "unknown")}
+- Coverage Type: {insurance_details.get("Coverage Details", {}).get("Coverage Type", "N/A")}
+- Annual Limit: {insurance_details.get("Coverage Details", {}).get("Coverage Limit", "N/A")}
+- Pre-authorization Required: {insurance_details.get("Coverage Details", {}).get("Pre-authorization", "N/A")}
 
-BILLING DATA:
-{json.dumps(patient_data.get("Billing", {}), indent=2)}
+Financial Details:
+- Total Hospital Bill: {billing.get("Total Cost", "N/A")}
+- Amount Covered by Insurance: {billing.get("Insurance Covered", "N/A")}
+- Patient's Balance: {billing.get("Patient Balance", "N/A")}
 
-INSURER RECORDS:
-{json.dumps(insurer_records, indent=2)}
+Pre-Authorization Records:
+{json.dumps(insurer_records.get("pre_authorization_records", []), indent=2)[:600]}
 
-INSURANCE POLICY TERMS:
-{policy_text[:2000]}  # Limit policy text length
+Coverage Limits Available:
+{json.dumps(insurer_records.get("coverage_limits", {}), indent=2)[:400]}
 
-VERIFICATION TASKS:
-1. Check if policy is active on admission date
-2. Verify pre-authorization status for procedures
-3. Check coverage limits against estimated bill
-4. Identify any exclusions or conditions
-5. Calculate patient responsibility (co-pay, deductible)
+Based on this information, assess whether the patient can be discharged from an insurance perspective. Check:
+1. Is the policy currently active?
+2. If pre-authorization was required, has it been approved?
+3. Are the coverage limits sufficient for the total bill?
+4. What is the patient's financial responsibility?
 
-OUTPUT REQUIREMENTS:
-Return ONLY a valid JSON object with this exact structure (no markdown, no explanation):
-{{
-  "noc": true or false,
-  "confidence": 0.0 to 1.0,
-  "issues": [
-    {{
-      "code": "ISSUE_CODE",
-      "title": "Short title",
-      "severity": "low|medium|high|critical",
-      "message": "Detailed explanation",
-      "suggested_action": "What to do",
-      "evidence": ["file_path#reference"],
-      "data": {{"key": "value"}}
-    }}
-  ],
-  "raw_data": {{
-    "policy_status": "active|expired",
-    "preauth_status": "approved|missing|pending",
-    "coverage_sufficient": true or false
-  }}
-}}
+Provide your analysis as a JSON object with these fields:
+- noc: boolean (true if insurance clears discharge, false if there are blocking issues)
+- confidence: number between 0 and 1
+- issues: array of any problems found (each with code, title, severity, message, suggested_action, evidence, data)
+- raw_data: object with policy_status, preauth_status, coverage_sufficient
 
-ISSUE CODES TO USE:
-- INS_POLICY_EXPIRED: Policy not active
-- INS_PREAUTH_MISSING: Pre-authorization missing
-- INS_LIMITS_EXCEEDED: Coverage limits insufficient
-- INS_PARTIAL_COVERAGE: Partial coverage with patient responsibility
-- INS_EXCLUSION_FOUND: Procedure excluded from coverage
-
-Set noc=false for critical issues (expired policy, missing preauth, insufficient limits).
-Set noc=true if all checks pass or only minor issues (co-pay collection needed).
+Use these issue codes when needed: INS_POLICY_EXPIRED, INS_PREAUTH_MISSING, INS_LIMITS_EXCEEDED, INS_PARTIAL_COVERAGE
 """
     
     def _parse_gemini_response(self, response_text: str) -> Dict[str, Any]:
@@ -145,13 +162,25 @@ Set noc=true if all checks pass or only minor issues (co-pay collection needed).
             # Convert issues to IssueSchema objects
             issues = []
             for issue_data in result.get("issues", []):
+                # Normalize severity
+                severity = issue_data.get("severity", "medium").lower()
+                if severity not in ["low", "medium", "high", "critical"]:
+                    severity = "medium"
+                
+                # Normalize evidence
+                evidence = issue_data.get("evidence", [])
+                if isinstance(evidence, dict):
+                    evidence = [f"{k}: {v}" for k, v in evidence.items()]
+                elif isinstance(evidence, str):
+                    evidence = [evidence]
+                
                 issues.append(self.create_issue(
                     code=issue_data["code"],
                     title=issue_data["title"],
-                    severity=issue_data["severity"],
+                    severity=severity,
                     message=issue_data["message"],
                     suggested_action=issue_data["suggested_action"],
-                    evidence=issue_data.get("evidence", []),
+                    evidence=evidence,
                     data=issue_data.get("data", {})
                 ))
             

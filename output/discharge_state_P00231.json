@@ -2,13 +2,13 @@
   "patient_id": "P00231",
   "status": "hold",
   "final_decision": "HOLD",
-  "timestamp": "2025-11-29T04:45:57.698291",
+  "timestamp": "2025-11-29T07:02:47.268316",
   "expires_at": null,
   "approved_by": [
-    "Insurance",
     "Ambulance"
   ],
   "blocked_by": [
+    "Insurance",
     "Pharmacy",
     "Bed Management",
     "Lab"
@@ -16,52 +16,80 @@
   "agents": {
     "Insurance": {
       "agent": "Insurance",
-      "noc": true,
-      "confidence": 0.7,
-      "issues": [],
+      "noc": false,
+      "confidence": 0.8,
+      "issues": [
+        {
+          "code": "INS_PARTIAL_COVERAGE",
+          "title": "Discrepancy between Pre-authorization and Actual Coverage",
+          "severity": "high",
+          "message": "Despite an approved pre-authorization for ₹500,000 and sufficient coverage limits for the ₹400,000 bill, the 'Amount Covered by Insurance' is reported as ₹0.00. This has resulted in a patient balance of ₹350,000. This indicates a significant issue with the actual insurance payout or claim processing, preventing discharge from an insurance perspective.",
+          "suggested_action": "Contact Red Insurance immediately to clarify why no amount has been covered despite an approved pre-authorization. Investigate potential deductibles, co-pays, non-covered services, or claim processing errors. Do not discharge the patient from an insurance perspective until this discrepancy is resolved and the financial responsibility is clear.",
+          "evidence": [
+            "Pre-authorization (PA-2024-00231) approved for ₹500,000. Financial Details show 'Amount Covered by Insurance: ₹0.00' and 'Patient's Balance: ₹350,000' against a 'Total Hospital Bill: ₹400,000'."
+          ],
+          "data": {
+            "preauth_approved_amount": 500000.0,
+            "actual_covered_amount": 0.0,
+            "patient_balance": 350000.0,
+            "total_hospital_bill": 400000.0
+          }
+        }
+      ],
       "meta": {
         "checked_fields": [
           "policy_number",
           "coverage_limits",
           "pre_authorization"
         ],
-        "time_ms": 11705.716,
+        "time_ms": 14910.777,
         "raw_response": {
-          "fallback": true
+          "policy_status": "active",
+          "preauth_status": "approved",
+          "coverage_sufficient": true
         }
       }
     },
     "Pharmacy": {
       "agent": "Pharmacy",
       "noc": false,
-      "confidence": 0.75,
+      "confidence": 1.0,
       "issues": [
         {
           "code": "PHARM_ORDER_PENDING",
-          "title": "Pending Medication Order",
+          "title": "Medication Order Pending",
           "severity": "high",
-          "message": "Medication 'Jondise' order is pending dispense",
-          "suggested_action": "Dispense medication before discharge",
-          "evidence": [
-            "data/pharmacy_inventory.json#active_orders[RX-002]"
-          ],
-          "data": {
-            "order_id": "RX-002",
-            "medication": "Jondise"
-          }
+          "message": "The pharmacy order for Jondise (Ursodeoxycholic Acid) is pending and has not been dispensed.",
+          "suggested_action": "Contact pharmacy to expedite dispensing of Jondise.",
+          "evidence": [],
+          "data": {}
+        },
+        {
+          "code": "PHARM_ORDER_PENDING",
+          "title": "Medication Order Not Processed",
+          "severity": "high",
+          "message": "Insulin Glargine is prescribed for discharge but no corresponding pharmacy order status (dispensed or pending) was found.",
+          "suggested_action": "Verify if an order for Insulin Glargine was placed and its current status. If not, place an order immediately.",
+          "evidence": [],
+          "data": {}
+        },
+        {
+          "code": "PHARM_ALLERGY_CONFLICT",
+          "title": "Potential Drug-Allergy Conflict",
+          "severity": "high",
+          "message": "Dolo-Crosine (Acetaminophen Extended) is prescribed, but the patient has a 'Liver complaint' allergy. Acetaminophen can be hepatotoxic.",
+          "suggested_action": "Review Dolo-Crosine prescription with the prescribing physician, considering the patient's liver complaint. Evaluate alternative analgesics or adjust dosage if appropriate.",
+          "evidence": [],
+          "data": {}
         },
         {
           "code": "PHARM_PAYMENT_PENDING",
-          "title": "Discharge Medication Payment Required",
-          "severity": "medium",
-          "message": "Patient needs to pay ₹4450.0 for discharge medications",
-          "suggested_action": "Collect ₹4450.0 from patient/family before discharge",
-          "evidence": [
-            "data/pharmacy_inventory.json#total_discharge_medication_cost"
-          ],
-          "data": {
-            "amount": 4450.0
-          }
+          "title": "Payment Pending for Discharge Medications",
+          "severity": "high",
+          "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
+          "suggested_action": "Ensure patient or responsible party clears payment for all discharge medications before release.",
+          "evidence": [],
+          "data": {}
         }
       ],
       "meta": {
@@ -71,31 +99,38 @@
           "active_orders",
           "drug_interactions"
         ],
-        "time_ms": 2528.07,
+        "time_ms": 14815.915,
         "raw_response": {
-          "fallback": true
+          "pending_orders": [
+            "Jondise",
+            "Insulin Glargine"
+          ],
+          "allergy_conflicts": [
+            {
+              "medication": "Dolo-Crosine",
+              "generic_name": "Acetaminophen Extended",
+              "allergy": "Liver complaint"
+            }
+          ],
+          "interactions_found": []
         }
       }
     },
     "Ambulance": {
       "agent": "Ambulance",
       "noc": true,
-      "confidence": 0.7,
+      "confidence": 1.0,
       "issues": [
         {
           "code": "TRANSPORT_REQUIRED",
-          "title": "Ambulance Transport Recommended",
+          "title": "Ambulance Transport Required",
           "severity": "medium",
-          "message": "Patient with liver cancer should have ambulance transport arranged",
-          "suggested_action": "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)",
-          "evidence": [
-            "data/transport_providers.json#providers"
-          ],
+          "message": "Patient requires ambulance transport due to serious condition (Liver Cancer) and existing condition (Excess Panting) which suggests a need for medical supervision and potential oxygen during transport.",
+          "suggested_action": "Proceed with booking an ALS ambulance.",
+          "evidence": [],
           "data": {
-            "provider": "MedTransport Services",
-            "vehicle": "Wheelchair",
-            "eta": 20,
-            "cost": 1200
+            "patient_diagnosis": "Liver Cancer",
+            "patient_condition": "Excess Panting"
           }
         }
       ],
@@ -105,42 +140,45 @@
           "discharge_disposition",
           "transport_providers"
         ],
-        "time_ms": 389.518,
+        "time_ms": 6766.844,
         "raw_response": {
           "transport_required": true,
-          "fallback": true
+          "recommended_vehicle_type": "ALS",
+          "provider_available": true,
+          "estimated_eta": 60
         }
       }
     },
     "Bed Management": {
       "agent": "Bed Management",
       "noc": false,
-      "confidence": 0.75,
+      "confidence": 0.3,
       "issues": [
         {
           "code": "BED_INVOICE_PENDING",
           "title": "Final Invoice Not Generated",
-          "severity": "high",
-          "message": "Invoice status: pending",
-          "suggested_action": "Generate final invoice via Billing UI before discharge",
+          "severity": "critical",
+          "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated, which is a critical prerequisite for discharge. This prevents final billing verification and payment processing.",
+          "suggested_action": "Contact the billing department immediately to finalize all charges and generate the final invoice for patient P00231.",
           "evidence": [
-            "data/billing_snapshot.json#invoice_status.invoice_generated"
+            "BILLING_SNAPSHOT#invoice_status.invoice_generated"
           ],
           "data": {
-            "status": "pending"
+            "invoice_generated": false
           }
         },
         {
-          "code": "BED_DEPOSIT_SHORTFALL",
-          "title": "Payment Required Before Discharge",
+          "code": "BED_BILLING_ADJUSTMENT",
+          "title": "Pending Billing Adjustments",
           "severity": "high",
-          "message": "Patient needs to pay ₹27500.0 before discharge",
-          "suggested_action": "Collect ₹27500.0 from patient/family",
+          "message": "There are two significant pending adjustments: an insurance pre-authorization for ₹247,500.00 and a dialysis procedure billing for ₹75,000.00. These items are not finalized and could impact the final patient balance, requiring resolution before discharge.",
+          "suggested_action": "Follow up with the insurance department for the pending pre-authorization and the medical coding/billing team to finalize the dialysis procedure charges. Ensure all adjustments are reflected in the final invoice.",
           "evidence": [
-            "data/billing_snapshot.json#payments.required_before_discharge"
+            "BILLING_SNAPSHOT#pending_adjustments"
           ],
           "data": {
-            "amount": 27500.0
+            "pending_adjustments_count": 2,
+            "total_pending_amount": 322500.0
           }
         }
       ],
@@ -150,9 +188,12 @@
           "deposit_paid",
           "housekeeping_schedule"
         ],
-        "time_ms": 345.97299999999996,
+        "time_ms": 13393.966,
         "raw_response": {
-          "fallback": true
+          "invoice_generated": false,
+          "deposit_sufficient": true,
+          "housekeeping_scheduled": true,
+          "shortfall_amount": 0
         }
       }
     },
@@ -229,7 +270,7 @@
           "test_results",
           "critical_values"
         ],
-        "time_ms": 488.876,
+        "time_ms": 35278.341,
         "raw_response": {
           "fallback": true
         }
@@ -238,76 +279,101 @@
   },
   "issues": [
     {
-      "code": "PHARM_ORDER_PENDING",
-      "title": "Pending Medication Order",
+      "code": "INS_PARTIAL_COVERAGE",
+      "title": "Discrepancy between Pre-authorization and Actual Coverage",
       "severity": "high",
-      "message": "Medication 'Jondise' order is pending dispense",
-      "suggested_action": "Dispense medication before discharge",
+      "message": "Despite an approved pre-authorization for ₹500,000 and sufficient coverage limits for the ₹400,000 bill, the 'Amount Covered by Insurance' is reported as ₹0.00. This has resulted in a patient balance of ₹350,000. This indicates a significant issue with the actual insurance payout or claim processing, preventing discharge from an insurance perspective.",
+      "suggested_action": "Contact Red Insurance immediately to clarify why no amount has been covered despite an approved pre-authorization. Investigate potential deductibles, co-pays, non-covered services, or claim processing errors. Do not discharge the patient from an insurance perspective until this discrepancy is resolved and the financial responsibility is clear.",
       "evidence": [
-        "data/pharmacy_inventory.json#active_orders[RX-002]"
+        "Pre-authorization (PA-2024-00231) approved for ₹500,000. Financial Details show 'Amount Covered by Insurance: ₹0.00' and 'Patient's Balance: ₹350,000' against a 'Total Hospital Bill: ₹400,000'."
       ],
       "data": {
-        "order_id": "RX-002",
-        "medication": "Jondise"
+        "preauth_approved_amount": 500000.0,
+        "actual_covered_amount": 0.0,
+        "patient_balance": 350000.0,
+        "total_hospital_bill": 400000.0
       },
+      "agent": "Insurance"
+    },
+    {
+      "code": "PHARM_ORDER_PENDING",
+      "title": "Medication Order Pending",
+      "severity": "high",
+      "message": "The pharmacy order for Jondise (Ursodeoxycholic Acid) is pending and has not been dispensed.",
+      "suggested_action": "Contact pharmacy to expedite dispensing of Jondise.",
+      "evidence": [],
+      "data": {},
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "PHARM_ORDER_PENDING",
+      "title": "Medication Order Not Processed",
+      "severity": "high",
+      "message": "Insulin Glargine is prescribed for discharge but no corresponding pharmacy order status (dispensed or pending) was found.",
+      "suggested_action": "Verify if an order for Insulin Glargine was placed and its current status. If not, place an order immediately.",
+      "evidence": [],
+      "data": {},
+      "agent": "Pharmacy"
+    },
+    {
+      "code": "PHARM_ALLERGY_CONFLICT",
+      "title": "Potential Drug-Allergy Conflict",
+      "severity": "high",
+      "message": "Dolo-Crosine (Acetaminophen Extended) is prescribed, but the patient has a 'Liver complaint' allergy. Acetaminophen can be hepatotoxic.",
+      "suggested_action": "Review Dolo-Crosine prescription with the prescribing physician, considering the patient's liver complaint. Evaluate alternative analgesics or adjust dosage if appropriate.",
+      "evidence": [],
+      "data": {},
       "agent": "Pharmacy"
     },
     {
       "code": "PHARM_PAYMENT_PENDING",
-      "title": "Discharge Medication Payment Required",
-      "severity": "medium",
-      "message": "Patient needs to pay ₹4450.0 for discharge medications",
-      "suggested_action": "Collect ₹4450.0 from patient/family before discharge",
-      "evidence": [
-        "data/pharmacy_inventory.json#total_discharge_medication_cost"
-      ],
-      "data": {
-        "amount": 4450.0
-      },
+      "title": "Payment Pending for Discharge Medications",
+      "severity": "high",
+      "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
+      "suggested_action": "Ensure patient or responsible party clears payment for all discharge medications before release.",
+      "evidence": [],
+      "data": {},
       "agent": "Pharmacy"
     },
     {
       "code": "TRANSPORT_REQUIRED",
-      "title": "Ambulance Transport Recommended",
+      "title": "Ambulance Transport Required",
       "severity": "medium",
-      "message": "Patient with liver cancer should have ambulance transport arranged",
-      "suggested_action": "Book Wheelchair from MedTransport Services (ETA: 20 min, Cost: ₹1200)",
-      "evidence": [
-        "data/transport_providers.json#providers"
-      ],
+      "message": "Patient requires ambulance transport due to serious condition (Liver Cancer) and existing condition (Excess Panting) which suggests a need for medical supervision and potential oxygen during transport.",
+      "suggested_action": "Proceed with booking an ALS ambulance.",
+      "evidence": [],
       "data": {
-        "provider": "MedTransport Services",
-        "vehicle": "Wheelchair",
-        "eta": 20,
-        "cost": 1200
+        "patient_diagnosis": "Liver Cancer",
+        "patient_condition": "Excess Panting"
       },
       "agent": "Ambulance"
     },
     {
       "code": "BED_INVOICE_PENDING",
       "title": "Final Invoice Not Generated",
-      "severity": "high",
-      "message": "Invoice status: pending",
-      "suggested_action": "Generate final invoice via Billing UI before discharge",
+      "severity": "critical",
+      "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated, which is a critical prerequisite for discharge. This prevents final billing verification and payment processing.",
+      "suggested_action": "Contact the billing department immediately to finalize all charges and generate the final invoice for patient P00231.",
       "evidence": [
-        "data/billing_snapshot.json#invoice_status.invoice_generated"
+        "BILLING_SNAPSHOT#invoice_status.invoice_generated"
       ],
       "data": {
-        "status": "pending"
+        "invoice_generated": false
       },
       "agent": "Bed Management"
     },
     {
-      "code": "BED_DEPOSIT_SHORTFALL",
-      "title": "Payment Required Before Discharge",
+      "code": "BED_BILLING_ADJUSTMENT",
+      "title": "Pending Billing Adjustments",
       "severity": "high",
-      "message": "Patient needs to pay ₹27500.0 before discharge",
-      "suggested_action": "Collect ₹27500.0 from patient/family",
+      "message": "There are two significant pending adjustments: an insurance pre-authorization for ₹247,500.00 and a dialysis procedure billing for ₹75,000.00. These items are not finalized and could impact the final patient balance, requiring resolution before discharge.",
+      "suggested_action": "Follow up with the insurance department for the pending pre-authorization and the medical coding/billing team to finalize the dialysis procedure charges. Ensure all adjustments are reflected in the final invoice.",
       "evidence": [
-        "data/billing_snapshot.json#payments.required_before_discharge"
+        "BILLING_SNAPSHOT#pending_adjustments"
       ],
       "data": {
-        "amount": 27500.0
+        "pending_adjustments_count": 2,
+        "total_pending_amount": 322500.0
       },
       "agent": "Bed Management"
     },
@@ -378,8 +444,8 @@
     }
   ],
   "metadata": {
-    "created_at": "2025-11-29T04:45:57.698291",
-    "last_updated": "2025-11-29T04:45:57.698291",
+    "created_at": "2025-11-29T07:02:47.268316",
+    "last_updated": "2025-11-29T07:02:47.268316",
     "version": "1.0"
   }
 }
