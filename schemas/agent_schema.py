@@ -42,3 +42,19 @@ class CoordinatorDecisionSchema(BaseModel):
     discharge_summary: Dict[str, str] = Field(..., description="Discharge summary with plain_text and for_medical_record")
     files_written: List[str] = Field(default_factory=list, description="List of files written during coordination")
     timestamp: str = Field(..., description="ISO8601 timestamp of decision")
+
+
+class EscalationAlert(BaseModel):
+    """Schema for escalation alerts sent to departments"""
+    alert_id: str = Field(..., description="Unique alert identifier")
+    patient_id: str = Field(..., description="Patient identifier")
+    department: str = Field(..., description="Target department (Lab Portal, Billing Portal, etc.)")
+    priority: Literal["urgent", "high", "normal", "low"] = Field(..., description="Alert priority based on severity")
+    issue_code: str = Field(..., description="Issue code from agent")
+    issue_title: str = Field(..., description="Short title of the issue")
+    message: str = Field(..., description="Detailed explanation of the issue")
+    suggested_action: str = Field(..., description="What the department should do")
+    evidence: List[str] = Field(default_factory=list, description="Supporting evidence/file paths")
+    data: Dict[str, Any] = Field(default_factory=dict, description="Additional data for the issue")
+    escalated_at: str = Field(..., description="ISO8601 timestamp when escalated")
+    status: Literal["pending", "acknowledged", "in_progress", "resolved"] = Field(default="pending", description="Current status of the alert")

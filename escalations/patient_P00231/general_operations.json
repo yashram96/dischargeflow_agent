@@ -1,0 +1,29 @@
+{
+  "department": "General Operations",
+  "patient_id": "P00231",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00231-GEN-001",
+      "patient_id": "P00231",
+      "department": "General Operations",
+      "priority": "high",
+      "issue_code": "DATA_INCONSISTENCY",
+      "issue_title": "Financial Data Contradiction",
+      "message": "The 'Amount Covered by Insurance' is stated as ₹0.00, while the 'Patient's Balance' is ₹350,000.00 for a total bill of ₹400,000.00. This implies ₹50,000.00 was covered, directly contradicting the stated 'Amount Covered by Insurance'. This inconsistency needs immediate clarification.",
+      "suggested_action": "Reconcile financial records with the insurance provider and the hospital's billing department to clarify the actual covered amount and patient responsibility.",
+      "evidence": [
+        "Amount Covered by Insurance: ₹0.00, Patient's Balance: ₹350000.00, Total Hospital Bill: ₹400000.00"
+      ],
+      "data": {
+        "amount_covered_by_insurance": 0.0,
+        "patient_balance": 350000.0,
+        "total_bill": 400000.0
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 1,
+  "highest_priority": "high",
+  "generated_at": "2025-11-29T07:54:34.373743"
+}

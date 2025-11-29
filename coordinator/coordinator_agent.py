@@ -5,6 +5,7 @@ import json
 
 from schemas.agent_schema import CoordinatorDecisionSchema
 from coordinator.state_manager import StateManager
+from coordinator.escalation_manager import EscalationManager
 from utils.file_utils import get_iso_timestamp
 from config import Config
 
@@ -25,6 +26,7 @@ class CoordinatorAgent:
             genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
         self.state_manager = StateManager()
+        self.escalation_manager = EscalationManager()
     
     def coordinate(
         self,
@@ -101,6 +103,16 @@ class CoordinatorAgent:
             recommended_next_steps=next_steps
         )
         files_written.append(audit_file)
+        
+        # Generate escalation alerts for departments
+        print("  Generating escalation alerts for departments...")
+        escalation_files = self.escalation_manager.create_escalations(
+            patient_id=patient_id,
+            issues=all_issues,
+            final_decision=final_decision
+        )
+        files_written.extend(escalation_files)
+        print(f"  ✓ Generated {len(escalation_files)} escalation alert files")
         
         # Create coordinator decision
         return CoordinatorDecisionSchema(

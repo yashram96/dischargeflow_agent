@@ -1,0 +1,65 @@
+{
+  "department": "Pharmacy Portal",
+  "patient_id": "P00231",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00231-PHA-003",
+      "patient_id": "P00231",
+      "department": "Pharmacy Portal",
+      "priority": "high",
+      "issue_code": "PHARM_ORDER_PENDING",
+      "issue_title": "Pharmacy Order Pending",
+      "message": "The pharmacy order for Jondise (RX-002) is currently pending and has not been dispensed.",
+      "suggested_action": "Contact pharmacy to expedite dispensing of Jondise.",
+      "evidence": [],
+      "data": {},
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-PHA-004",
+      "patient_id": "P00231",
+      "department": "Pharmacy Portal",
+      "priority": "high",
+      "issue_code": "PHARM_ORDER_PENDING",
+      "issue_title": "Missing Pharmacy Order",
+      "message": "Insulin Glargine is listed as a discharge medication but no corresponding pharmacy order was found or processed.",
+      "suggested_action": "Create and process a pharmacy order for Insulin Glargine immediately.",
+      "evidence": [],
+      "data": {},
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-PHA-005",
+      "patient_id": "P00231",
+      "department": "Pharmacy Portal",
+      "priority": "high",
+      "issue_code": "PHARM_ALLERGY_CONFLICT",
+      "issue_title": "Potential Allergy Conflict",
+      "message": "Dolo-Crosine (Acetaminophen Extended) is prescribed for a patient with a known 'Liver complaint' allergy. Acetaminophen can be hepatotoxic.",
+      "suggested_action": "Review Dolo-Crosine prescription with prescribing physician. Consider alternative medication or dose adjustment, and ensure liver function monitoring is in place.",
+      "evidence": [],
+      "data": {},
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-PHA-006",
+      "patient_id": "P00231",
+      "department": "Pharmacy Portal",
+      "priority": "high",
+      "issue_code": "PHARM_PAYMENT_PENDING",
+      "issue_title": "Payment Pending for Discharge Medications",
+      "message": "Payment status for all discharge medications (Dolo-Crosine, Jondise, Insulin Glargine) is pending.",
+      "suggested_action": "Ensure patient or insurance clears payment for all discharge medications before release.",
+      "evidence": [],
+      "data": {},
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 4,
+  "highest_priority": "high",
+  "generated_at": "2025-11-29T07:54:34.375604"
+}

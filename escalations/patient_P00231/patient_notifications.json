@@ -1,0 +1,91 @@
+{
+  "patient_id": "P00231",
+  "notifications": [
+    {
+      "priority": "high",
+      "title": "Financial Data Contradiction",
+      "message": "The 'Amount Covered by Insurance' is stated as ₹0.00, while the 'Patient's Balance' is ₹350,000.00 for a total bill of ₹400,000.00. This implies ₹50,000.00 was covered, directly contradicting the stated 'Amount Covered by Insurance'. This inconsistency needs immediate clarification.",
+      "action_required": "Reconcile financial records with the insurance provider and the hospital's billing department to clarify the actual covered amount and patient responsibility.",
+      "department": "General Operations"
+    },
+    {
+      "priority": "urgent",
+      "title": "Approved Pre-authorization Not Reflected in Coverage",
+      "message": "Please contact the insurance desk regarding: Approved Pre-authorization Not Reflected in Coverage",
+      "action_required": "Contact Red Insurance immediately to ascertain why the approved pre-authorization has not resulted in coverage for the bill. Verify if all procedures billed align with the pre-authorized services and if any deductibles, co-pays, or non-covered services are impacting the claim.",
+      "department": "Insurance Desk"
+    },
+    {
+      "priority": "high",
+      "title": "Pharmacy Order Pending",
+      "message": "Your medication pharmacy order pending requires action.",
+      "action_required": "Contact pharmacy to expedite dispensing of Jondise.",
+      "department": "Pharmacy Portal"
+    },
+    {
+      "priority": "high",
+      "title": "Missing Pharmacy Order",
+      "message": "Your medication missing pharmacy order requires action.",
+      "action_required": "Create and process a pharmacy order for Insulin Glargine immediately.",
+      "department": "Pharmacy Portal"
+    },
+    {
+      "priority": "high",
+      "title": "Potential Allergy Conflict",
+      "message": "Your medication potential allergy conflict requires action.",
+      "action_required": "Review Dolo-Crosine prescription with prescribing physician. Consider alternative medication or dose adjustment, and ensure liver function monitoring is in place.",
+      "department": "Pharmacy Portal"
+    },
+    {
+      "priority": "high",
+      "title": "Payment Pending for Discharge Medications",
+      "message": "Your medication payment pending for discharge medications requires action.",
+      "action_required": "Ensure patient or insurance clears payment for all discharge medications before release.",
+      "department": "Pharmacy Portal"
+    },
+    {
+      "priority": "urgent",
+      "title": "Final Invoice Not Generated",
+      "message": "There is a billing matter that needs your attention: The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
+      "action_required": "Generate the final invoice for patient P00231. Ensure all charges are captured and approved.",
+      "department": "Billing Portal"
+    },
+    {
+      "priority": "high",
+      "title": "Pending Billing Adjustments",
+      "message": "There is a billing matter that needs your attention: There are pending adjustments that need to be finalized before discharge. This includes insurance pre-authorization and dialysis procedure billing, which could impact the final patient responsibility.",
+      "action_required": "Expedite approval for insurance pre-authorization and finalize billing for the dialysis procedure. Update the patient's account accordingly.",
+      "department": "Billing Portal"
+    },
+    {
+      "priority": "high",
+      "title": "Required lab test pending",
+      "message": "Your required lab test pending needs attention. Please contact the lab.",
+      "action_required": "Ensure Chest X-Ray is completed and results are reviewed by a physician before discharge.",
+      "department": "Lab Portal"
+    },
+    {
+      "priority": "urgent",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Consult with physician for immediate review and intervention regarding critical RBC level.",
+      "department": "Lab Portal"
+    },
+    {
+      "priority": "urgent",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Consult with physician for immediate review and intervention regarding critical Platelets level.",
+      "department": "Lab Portal"
+    },
+    {
+      "priority": "urgent",
+      "title": "Critical lab value detected",
+      "message": "Your critical lab value detected needs attention. Please contact the lab.",
+      "action_required": "Consult with physician for immediate review and intervention regarding critical Hemoglobin level.",
+      "department": "Lab Portal"
+    }
+  ],
+  "total_notifications": 12,
+  "generated_at": "2025-11-29T07:54:34.375604"
+}

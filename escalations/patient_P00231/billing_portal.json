@@ -1,0 +1,58 @@
+{
+  "department": "Billing Portal",
+  "patient_id": "P00231",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00231-BIL-008",
+      "patient_id": "P00231",
+      "department": "Billing Portal",
+      "priority": "urgent",
+      "issue_code": "BED_INVOICE_PENDING",
+      "issue_title": "Final Invoice Not Generated",
+      "message": "The final invoice for patient P00231 (account ACC-00231-2024) has not yet been generated. Discharge cannot be completed without a finalized bill.",
+      "suggested_action": "Generate the final invoice for patient P00231. Ensure all charges are captured and approved.",
+      "evidence": [
+        "BILLING SNAPSHOT#invoice_status.invoice_generated"
+      ],
+      "data": {
+        "patient_id": "P00231",
+        "account_id": "ACC-00231-2024"
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-BIL-009",
+      "patient_id": "P00231",
+      "department": "Billing Portal",
+      "priority": "high",
+      "issue_code": "BED_BILLING_ADJUSTMENT",
+      "issue_title": "Pending Billing Adjustments",
+      "message": "There are pending adjustments that need to be finalized before discharge. This includes insurance pre-authorization and dialysis procedure billing, which could impact the final patient responsibility.",
+      "suggested_action": "Expedite approval for insurance pre-authorization and finalize billing for the dialysis procedure. Update the patient's account accordingly.",
+      "evidence": [
+        "BILLING SNAPSHOT#pending_adjustments"
+      ],
+      "data": {
+        "pending_adjustments_count": 2,
+        "details": [
+          {
+            "description": "Insurance pre-authorization pending",
+            "amount": 247500.0,
+            "status": "pending_approval"
+          },
+          {
+            "description": "Dialysis procedure billing",
+            "amount": 75000.0,
+            "status": "not_finalized"
+          }
+        ]
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 2,
+  "highest_priority": "urgent",
+  "generated_at": "2025-11-29T07:54:34.375604"
+}

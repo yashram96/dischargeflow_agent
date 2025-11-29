@@ -1,0 +1,100 @@
+{
+  "department": "Lab Portal",
+  "patient_id": "P00231",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00231-LAB-010",
+      "patient_id": "P00231",
+      "department": "Lab Portal",
+      "priority": "high",
+      "issue_code": "LAB_PENDING",
+      "issue_title": "Required lab test pending",
+      "message": "The 'Chest X-Ray' test is required for discharge but its status is 'pending'. It has not been completed before the discharge clearance time.",
+      "suggested_action": "Ensure Chest X-Ray is completed and results are reviewed by a physician before discharge.",
+      "evidence": [
+        "LAB RESULTS DATABASE#LAB-002"
+      ],
+      "data": {
+        "test_name": "Chest X-Ray",
+        "status": "pending"
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-LAB-011",
+      "patient_id": "P00231",
+      "department": "Lab Portal",
+      "priority": "urgent",
+      "issue_code": "LAB_CRITICAL_VALUE",
+      "issue_title": "Critical lab value detected",
+      "message": "RBC value of 2.8 10^6/uL is critically low (reference range: 4.5-5.9, critical threshold: 3.0).",
+      "suggested_action": "Consult with physician for immediate review and intervention regarding critical RBC level.",
+      "evidence": [
+        "LAB RESULTS DATABASE#LAB-001"
+      ],
+      "data": {
+        "test_name": "Complete Blood Count",
+        "component": "RBC",
+        "value": 2.8,
+        "units": "10^6/uL",
+        "reference_range": "4.5-5.9",
+        "flag": "critical",
+        "critical_threshold": 3.0
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-LAB-012",
+      "patient_id": "P00231",
+      "department": "Lab Portal",
+      "priority": "urgent",
+      "issue_code": "LAB_CRITICAL_VALUE",
+      "issue_title": "Critical lab value detected",
+      "message": "Platelets value of 960 10^3/uL is critically high (reference range: 150-400, critical threshold: 450).",
+      "suggested_action": "Consult with physician for immediate review and intervention regarding critical Platelets level.",
+      "evidence": [
+        "LAB RESULTS DATABASE#LAB-001"
+      ],
+      "data": {
+        "test_name": "Complete Blood Count",
+        "component": "Platelets",
+        "value": 960,
+        "units": "10^3/uL",
+        "reference_range": "150-400",
+        "flag": "critical",
+        "critical_threshold": 450
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    },
+    {
+      "alert_id": "ALERT-P00231-LAB-013",
+      "patient_id": "P00231",
+      "department": "Lab Portal",
+      "priority": "urgent",
+      "issue_code": "LAB_CRITICAL_VALUE",
+      "issue_title": "Critical lab value detected",
+      "message": "Hemoglobin value of 8.2 g/dL is critically low (reference range: 13.5-17.5, critical threshold: 10.0).",
+      "suggested_action": "Consult with physician for immediate review and intervention regarding critical Hemoglobin level.",
+      "evidence": [
+        "LAB RESULTS DATABASE#LAB-001"
+      ],
+      "data": {
+        "test_name": "Complete Blood Count",
+        "component": "Hemoglobin",
+        "value": 8.2,
+        "units": "g/dL",
+        "reference_range": "13.5-17.5",
+        "flag": "critical",
+        "critical_threshold": 10.0
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 4,
+  "highest_priority": "urgent",
+  "generated_at": "2025-11-29T07:54:34.375604"
+}

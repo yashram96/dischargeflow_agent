@@ -1,0 +1,28 @@
+{
+  "patient_id": "P00231",
+  "final_decision": "HOLD",
+  "total_alerts": 13,
+  "alerts_by_priority": {
+    "urgent": 5,
+    "high": 7,
+    "normal": 1,
+    "low": 0
+  },
+  "departments_involved": [
+    "General Operations",
+    "Insurance Desk",
+    "Pharmacy Portal",
+    "Transport Services",
+    "Billing Portal",
+    "Lab Portal"
+  ],
+  "department_summary": {
+    "General Operations": 1,
+    "Insurance Desk": 1,
+    "Pharmacy Portal": 4,
+    "Transport Services": 1,
+    "Billing Portal": 2,
+    "Lab Portal": 4
+  },
+  "generated_at": "2025-11-29T07:54:34.375604"
+}

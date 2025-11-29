@@ -1,0 +1,29 @@
+{
+  "department": "Transport Services",
+  "patient_id": "P00231",
+  "alerts": [
+    {
+      "alert_id": "ALERT-P00231-TRA-007",
+      "patient_id": "P00231",
+      "department": "Transport Services",
+      "priority": "normal",
+      "issue_code": "TRANSPORT_REQUIRED",
+      "issue_title": "Ambulance Transport Required",
+      "message": "Patient has a serious condition (Liver Cancer) requiring medical supervision during transport. An ALS ambulance is recommended due to the diagnosis and existing condition of excess panting.",
+      "suggested_action": "Proceed with booking an ALS ambulance with City Emergency Ambulance (AMB-001).",
+      "evidence": [],
+      "data": {
+        "patient_diagnosis": "Liver Cancer",
+        "recommended_type": "ALS",
+        "provider_name": "City Emergency Ambulance",
+        "provider_id": "AMB-001",
+        "eta_minutes": 60
+      },
+      "escalated_at": "2025-11-29T07:54:34.373233",
+      "status": "pending"
+    }
+  ],
+  "total_alerts": 1,
+  "highest_priority": "normal",
+  "generated_at": "2025-11-29T07:54:34.375604"
+}
